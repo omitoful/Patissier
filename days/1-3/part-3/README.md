@@ -2,7 +2,7 @@
 
 ## Assignment
 
-![Collection View Item/Normal/Product With Placeholder](../../resources/images/collection-view-item/normal/product-with-placeholder.png)
+![Collection View Item/Normal/Product With Placeholder](../../../resources/images/collection-view-item/normal/product-with-placeholder.png)
 
 1. Please implement the UI. See details on the [Zeplin](https://zpl.io/bzYXEeG).
 
@@ -18,4 +18,4 @@ Please truncate a text when it reaches edges of another view.
 
 ### Resources
 
-* [Assets](../../resources/assets)
+* [Assets](../../../resources/assets)

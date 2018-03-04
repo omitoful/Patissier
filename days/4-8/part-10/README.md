@@ -9,7 +9,7 @@
 
 ## Assignment
 
-![Controller/Product List/Normal/Products With Placeholders Without Tab Bar](../../resources/images/controller/product-list/normal/products-with-placeholders-without-tab-bar.png)
+![Controller/Product List/Normal/Products With Placeholders Without Tab Bar](../../../resources/images/controller/product-list/normal/products-with-placeholders-without-tab-bar.png)
 
 1. Making HTTP requests in iOS is an asynchronous task. Please make `fetchProducts()` function go back to the main thread before calling the delegate functions.
 2. Please use `ProductManager` to request products in product list view controller.

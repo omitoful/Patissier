@@ -4,11 +4,11 @@
 
 **Before signing in**
 
-![Controller/Landing/Normal/Sign In](../../resources/images/controller/landing/normal/sign-in.png)
+![Controller/Landing/Normal/Sign In](../../../resources/images/controller/landing/normal/sign-in.png)
 
 **After signed in**
 
-![Controller/Product List/Normal/Products With Placeholders Without Tab Bar](../../resources/images/controller/product-list/normal/products-with-placeholders-without-tab-bar.png)
+![Controller/Product List/Normal/Products With Placeholders Without Tab Bar](../../../resources/images/controller/product-list/normal/products-with-placeholders-without-tab-bar.png)
 
 1. Please implement the UI. See details on the [Zeplin](https://zpl.io/bzYXEeG).
 2. Please switch from the sign-in to the product list after a user signed in with Facebook successfully.
