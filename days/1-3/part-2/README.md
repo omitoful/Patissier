@@ -10,8 +10,9 @@
 | name |
 | price |
 
+Example
+
 ```
-Ex:
 name: Chocolate Cake
 price: TWD $120
 ```

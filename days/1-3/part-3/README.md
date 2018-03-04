@@ -14,7 +14,7 @@ Please truncate a text when it reaches edges of another view.
 
 ### Hint
 
-* Generating colorful icons with UIImage rendering mode: Template and tint color
+* Generating colorful icons with UIImage rendering mode `template` and tint color
 
 ### Resources
 

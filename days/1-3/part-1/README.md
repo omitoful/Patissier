@@ -23,14 +23,15 @@ From now on, we're going to start the project `Pâtissier`. (in French)
 Every time before you start a new assignment, please create a new branch with the following naming rules from the **master** branch on the origin and do your assignment on this new branch.
 
 ```
-Branch naming rules:
+// The branch naming rules.
+part-< part number >
+```
 
-  part-(part number)
+Example
 
-
-Ex: Part.3
-
-  => part-3
+```
+// For the part.3.
+part-3
 ```
 
 1. Please make your first commit for the changes using git.
