@@ -8,9 +8,9 @@ You can request your personal profile data with this endpoint.
 
 **Headers**
 
-| Parameter | Description | Required |
+| Header | Value | Required |
 | --- | --- | --- |
-| Authorization | Bearer \< jwt token \> | v |
+| Authorization | Bearer < jwt token > | v |
 
 ### Response 200 (application/json)
 
@@ -44,9 +44,9 @@ You can retrieve the data of your orders using this endpoint. If there comes mor
 
 **Headers**
 
-| Parameter | Description | Required |
+| Header | Value | Required |
 | --- | --- | --- |
-| Authorization | Bearer \< jwt token \> | v |
+| Authorization | Bearer < jwt token > | v |
 
 **Query**
 
@@ -63,7 +63,7 @@ GET /orders
 
 Example
 
-```json
+```
 // For the certain page of orders.
 GET /orders?paging=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI1OGZlYjIxNzcyZTYyYjEwYTdlN2QxOGMiLCJsaW1pdCI6MTAsIm9mZnNldCI6MTAsInR5cGUiOiJwYWdlIiwidmVyc2lvbiI6IjEuMCJ9.jBzB-49t8e0t0irN0KBoXg-pjqBrlIixqnydLxsB9qc
 ```

@@ -8,9 +8,9 @@ You can request a product information with its id.
 
 **Headers**
 
-| Parameter | Description | Required |
+| Header | Value | Required |
 | --- | --- | --- |
-| Authorization | Bearer \< jwt token \> | v |
+| Authorization | Bearer < jwt token > | v |
 
 ### Response 200 (application/json)
 
@@ -42,9 +42,9 @@ You can retrieve the data of comments of a product using this endpoint. If there
 
 **Headers**
 
-| Parameter | Description | Required |
+| Header | Value | Required |
 | --- | --- | --- |
-| Authorization | Bearer \< jwt token \> | v |
+| Authorization | Bearer < jwt token > | v |
 
 **Query**
 
@@ -54,13 +54,13 @@ You can retrieve the data of comments of a product using this endpoint. If there
 
 Example
 
-```json
+```
 // For the first page of comments.
 GET /products/591f03ad623394fae007fbf8/comments
 ```
 Example
 
-```json
+```
 // For the certain page of comments.
 GET /products/591f03ad623394fae007fbf8/comments?paging=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI1OGZlYjIxNzcyZTYyYjEwYTdlN2QxOGMiLCJsaW1pdCI6MTAsIm9mZnNldCI6MTAsInR5cGUiOiJwYWdlIiwidmVyc2lvbiI6IjEuMCJ9.jBzB-49t8e0t0irN0KBoXg-pjqBrlIixqnydLxsB9qc
 ```

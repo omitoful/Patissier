@@ -8,9 +8,9 @@ You can sign in with a valid Facebook access token, and then the server will ret
 
 **Headers**
 
-| Parameter | Description | Required |
+| Header | Value | Required |
 | --- | --- | --- |
-| Content-Type | `application/json` | v |
+| Content-Type | application/json | v |
 
 **Body**
 
@@ -22,9 +22,7 @@ Example
 
 ```json
 {
-  "data": {
-    "access_token": "EAACEdEose0cBALXlMirnYBYqgNAMwIXyUXD0fpijkNXo3TOHZAcldfRQaM93evxd5dCcBjpSzv1dB5DoAzmk680LnucZBWW6ZBTbiKzHeekvRlwZBY7PCrq7aYGDq8dEH3hPUnFkpqaVrN2cKp7GioVqapCKtS2aGXo0h80rugZAULZCuSumYqLaIv3DZBPQQ2MZD"
-  }
+  "access_token": "EAACEdEose0cBALXlMirnYBYqgNAMwIXyUXD0fpijkNXo3TOHZAcldfRQaM93evxd5dCcBjpSzv1dB5DoAzmk680LnucZBWW6ZBTbiKzHeekvRlwZBY7PCrq7aYGDq8dEH3hPUnFkpqaVrN2cKp7GioVqapCKtS2aGXo0h80rugZAULZCuSumYqLaIv3DZBPQQ2MZD"
 }
 ```
 
@@ -32,10 +30,10 @@ Example
 
 **Body**
 
-| Parameter | Description |
-| --- | --- |
-| token_type | The token type. |
-| token | A token. |
+| Parameter | Type | Description |
+| --- | --- | --- |
+| token_type | String | The token type. |
+| token | String | A token. |
 
 Example
 

@@ -10,10 +10,10 @@ You can have at the least one or multiple items for a single order.
 
 **Headers**
 
-| Parameter | Description | Required |
+| Header | Value | Required |
 | --- | --- | --- |
-| Authorization | Bearer \< jwt token \> | v |
-| Content-Type | `application/json` | v |
+| Authorization | Bearer < jwt token > | v |
+| Content-Type | application/json | v |
 
 **Body**
 
@@ -21,7 +21,7 @@ You can have at the least one or multiple items for a single order.
 | --- | --- | --- |
 | items | An array of items. | v |
 | item.type | The item type. Please make sure the type is on the list of the supported items. | v |
-| item.id | The item id. For example, If the item type is `product`, then the id of this item is the product id. | v |
+| item.id | The item id. For example, If the item is product, then the id of this item is the product id. | v |
 | item.quantity | The quantitiy of the items. | v |
 | recipient.phone_number | The recipient's phone number. | v |
 | recipient.first_name | The recipient's first name. | v |
@@ -34,22 +34,22 @@ You can have at the least one or multiple items for a single order.
 
 **Supported Items**
 
-| Item | Type |
+| Item | Value |
 | --- | --- |
-| Product | `product` |
+| Product | product |
 
 **Supported Titles**
 
-| Title | Type |
+| Title | Value |
 | --- | --- |
-| Mister | `mister` |
-| Miss | `miss` |
+| Mister | mister |
+| Miss | miss |
 
 **Supported Services**
 
-| Service | Type |
+| Service | Value |
 | --- | --- |
-| Post Office | `post-office` |
+| Post Office | post-office |
 
 Example
 
@@ -103,10 +103,10 @@ You can pay for an order with the supported payment methods.
 
 **Headers**
 
-| Parameter | Description | Required |
+| Header | Value | Required |
 | --- | --- | --- |
-| Authorization | Bearer \< jwt token \> | v |
-| Content-Type | `application/json` | v |
+| Authorization | Bearer < jwt token > | v |
+| Content-Type | application/json | v |
 
 **Body**
 
@@ -120,9 +120,9 @@ You can pay for an order with the supported payment methods.
 
 **Supported Payment Methods**
 
-| Method | Type |
+| Method | Value |
 | --- | --- |
-| Credit Card | `credit-card` |
+| Credit Card | credit-card |
 
 Example
 
