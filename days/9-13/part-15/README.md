@@ -5,7 +5,7 @@
 You can get the picture image of a user with his / her id.
 
 ```
-Image URL:
+// The image URL of a user.
 http://< website host >/users/< user id >/picture.jpg
 ```
 

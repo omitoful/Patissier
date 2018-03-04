@@ -22,7 +22,9 @@ Example
 
 ```json
 {
-  "access_token": "EAACEdEose0cBALXlMirnYBYqgNAMwIXyUXD0fpijkNXo3TOHZAcldfRQaM93evxd5dCcBjpSzv1dB5DoAzmk680LnucZBWW6ZBTbiKzHeekvRlwZBY7PCrq7aYGDq8dEH3hPUnFkpqaVrN2cKp7GioVqapCKtS2aGXo0h80rugZAULZCuSumYqLaIv3DZBPQQ2MZD"
+  "data": {
+    "access_token": "EAACEdEose0cBALXlMirnYBYqgNAMwIXyUXD0fpijkNXo3TOHZAcldfRQaM93evxd5dCcBjpSzv1dB5DoAzmk680LnucZBWW6ZBTbiKzHeekvRlwZBY7PCrq7aYGDq8dEH3hPUnFkpqaVrN2cKp7GioVqapCKtS2aGXo0h80rugZAULZCuSumYqLaIv3DZBPQQ2MZD"
+  }
 }
 ```
 

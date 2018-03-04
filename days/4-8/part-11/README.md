@@ -5,7 +5,7 @@
 You can get the preview image of a product with its id.
 
 ```
-// The URL of an image.
+// The image URL of a product.
 http://< website host >/products/< product id >/preview.jpg
 ```
 

@@ -46,7 +46,7 @@ You can retrieve the data of your orders using this endpoint. If there comes mor
 
 | Parameter | Description | Required |
 | --- | --- | --- |
-| Authorization | Bearer \< JWT token \> | v |
+| Authorization | Bearer \< jwt token \> | v |
 
 **Query**
 
@@ -57,14 +57,14 @@ You can retrieve the data of your orders using this endpoint. If there comes mor
 Example
 
 ```
-// For the first page of orders:
+// For the first page of orders.
 GET /orders
 ```
 
 Example
 
 ```json
-// For the certain page of orders:
+// For the certain page of orders.
 GET /orders?paging=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI1OGZlYjIxNzcyZTYyYjEwYTdlN2QxOGMiLCJsaW1pdCI6MTAsIm9mZnNldCI6MTAsInR5cGUiOiJwYWdlIiwidmVyc2lvbiI6IjEuMCJ9.jBzB-49t8e0t0irN0KBoXg-pjqBrlIixqnydLxsB9qc
 ```
 
