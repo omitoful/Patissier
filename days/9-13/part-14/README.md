@@ -44,7 +44,7 @@ You can retrieve the data of comments of a product using this endpoint. If there
 
 | Parameter | Description | Required |
 | --- | --- | --- |
-| Authorization | Bearer \< JWT token \> | v |
+| Authorization | Bearer \< jwt token \> | v |
 
 **Query**
 
