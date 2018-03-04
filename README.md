@@ -8,7 +8,7 @@
 
 ## Outline
 
-###UI
+### UI
 
 * Frames v.s. Bounds, Coordinate System
 * Auto Layout
@@ -21,12 +21,12 @@
 * UITabBarController
 * Lifecycle of App and Controller
 
-###Patterns
+### Patterns
 
 * Object-Oriented Programming
 * Model-View-Controller
 
-###Concepts
+### Concepts
 
 * Reference Type v.s. Value Type
 * Delegation
@@ -36,7 +36,7 @@
 * Auto Reference Counting
 * Unowned v.s. Weak
 
-###Networking
+### Networking
 
 * HTTP
 * URLRequest, URLSession
@@ -46,19 +46,19 @@
 * Restful APIs 
 * Alamofire
 
-###Data Persistence
+### Data Persistence
 
 * UserDefaults
 * Core Data
 
-###Tools
+### Tools
 
 * Git, GitHub
 * Cocoapods
 * Postman
 * Facebook SDK
 
-###Other
+### Other
 
 * Localization
 * Debugging
