@@ -36,20 +36,20 @@ You can have at the least one or multiple items for a single order.
 
 | Item | Value |
 | --- | --- |
-| Product | product |
+| Product | PRODUCT |
 
 **Supported Titles**
 
 | Title | Value |
 | --- | --- |
-| Mister | mister |
-| Miss | miss |
+| Mister | MISTER |
+| Miss | MISS |
 
 **Supported Services**
 
 | Service | Value |
 | --- | --- |
-| Post Office | post-office |
+| Post Office | POST_OFFICE |
 
 Example
 
@@ -122,13 +122,13 @@ You can pay for an order with the supported payment methods.
 
 | Method | Value |
 | --- | --- |
-| Credit Card | credit-card |
+| Credit Card | CREDIT_CARD |
 
 Example
 
 ```json
 {
-  "payment_method": "credit-card",
+  "payment_method": "CREDIT_CARD",
   "credit_card": {
     "number": "1234-1234-1234-1234",
     "expiration_month": 12,

@@ -37,13 +37,13 @@ GET /products?paging=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI1OGZlYjIxNz
 
 **Body**
 
-| Parameter | Type | Description |
-| --- | --- | --- |
-| data | Array | The array of products. |
-| product.id | String | The product id. |
-| product.name | String | The product name. |
-| product.price | Int | The product price. |
-| paging.next | String | The next page token. |
+| Parameter | Description |
+| --- | --- |
+| data | The array of products. |
+| product.id | The product id. |
+| product.name | The product name. |
+| product.price | The product price. |
+| paging.next | The next page token. |
 
 Example
 

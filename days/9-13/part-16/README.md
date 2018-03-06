@@ -95,7 +95,7 @@ Example
       "items": [
         {
           "id": "591f03ad623394fae007fbf8",
-          "type": "product",
+          "type": "PRODUCT",
           "quantity": 2
         }
       ],
@@ -106,10 +106,10 @@ Example
         "phone_number": "0987654321",
         "first_name": "Roy",
         "last_name": "Hsu",
-        "title": "mister"
+        "title": "MISTER"
       },
       "shipping": {
-        "service": "post-office",
+        "service": "POST_OFFICE",
         "postal_code": "110",
         "city": "Taipei",
         "address": "No.7, Sec. 5, Xinyi Rd., Xinyi Dist."
@@ -117,7 +117,7 @@ Example
       "total_amount": 20,
       "transaction": {
         "id": "59380600907b4e44ff9467f8",
-        "payment_method": "credit-card"
+        "payment_method": "CREDIT_CARD"
       },
       "created": "2017-06-10T06:05:40.000Z"
     }

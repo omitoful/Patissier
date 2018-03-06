@@ -30,17 +30,17 @@ Example
 
 **Body**
 
-| Parameter | Type | Description |
-| --- | --- | --- |
-| token_type | String | The token type. |
-| token | String | A token. |
+| Parameter | Description |
+| --- | --- |
+| token_type | The token type. |
+| token | A token. |
 
 Example
 
 ```json
 {
   "data": {
-    "token_type": "bearer",
+    "token_type": "BEARER",
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI1OTQxMmMwOTg5NjM0YmJmNzQxY2MyZmIiLCJleHAiOjE1Mjg5NzkzMzguODYwNzgsImlhdCI6MTQ5NzQ0MzMzOC44NjA3OCwiaXNzIjoiNThmZWIyMTc3MmU2MmIxMGE3ZTdkMThjIiwidHlwZSI6ImFwcCIsInZlcnNpb24iOiIxLjAifQ.vAg7-nEx2B3GNzFT_I5BoB6MCq557XFh-d1wc_x1t6E"
   }
 }
