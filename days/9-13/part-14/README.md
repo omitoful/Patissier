@@ -34,9 +34,9 @@ Example
 }
 ```
 
-## API endpoint [GET /products/:id/comments?{paging}]
+## API endpoint [GET /products/:id/comments?{offset,count}]
 
-You can retrieve the data of comments of a product using this endpoint. If there comes more than one page of data, please use the returned page token to keep requesting more data.
+You can retrieve the data of comments of a product using this endpoint.
 
 ### Request
 
@@ -50,7 +50,8 @@ You can retrieve the data of comments of a product using this endpoint. If there
 
 | Parameter | Description | Required |
 | --- | --- | --- |
-| paging | A page token. |  |
+| offset | The offset of retrieving  comments. |  |
+| count | The number of retrieving comments. | |
 
 Example
 
@@ -61,8 +62,8 @@ GET /products/591f03ad623394fae007fbf8/comments
 Example
 
 ```
-// For the certain page of comments.
-GET /products/591f03ad623394fae007fbf8/comments?paging=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI1OGZlYjIxNzcyZTYyYjEwYTdlN2QxOGMiLCJsaW1pdCI6MTAsIm9mZnNldCI6MTAsInR5cGUiOiJwYWdlIiwidmVyc2lvbiI6IjEuMCJ9.jBzB-49t8e0t0irN0KBoXg-pjqBrlIixqnydLxsB9qc
+// For the certain offset and count of comments.
+GET /products/591f03ad623394fae007fbf8/comments?offset=3&count=5
 ```
 
 ### Response 200 (application/json)
@@ -71,11 +72,9 @@ GET /products/591f03ad623394fae007fbf8/comments?paging=eyJhbGciOiJIUzI1NiIsInR5c
 
 | Parameter | Description |
 | --- | --- |
-| data | The array of comments. |
 | comment.id | The comment id. |
 | comment.text | The comment text. |
 | comment.user | The comment's owner. |
-| paging.next | The next page token. |
 
 Example
 
@@ -90,13 +89,10 @@ Example
         "name": "Roy Hsu"
       }
     }
-  ],
-  "paging": {
-    "next": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI1OGZlYjIxNzcyZTYyYjEwYTdlN2QxOGMiLCJsaW1pdCI6MTAsIm9mZnNldCI6MTAsInR5cGUiOiJwYWdlIiwidmVyc2lvbiI6IjEuMCJ9.jBzB-49t8e0t0irN0KBoXg-pjqBrlIixqnydLxsB9qc"
-  }
+  ]
 }
 ```
 
 ## Assignment
 
-1. Please implement the `GET /products/:id` and `GET /products/:id/comments?{paging}` APIs.
+1. Please implement the `GET /products/:id` and `GET /products/:id/comments?{offset,count}` APIs.

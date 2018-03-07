@@ -16,7 +16,7 @@ You can retrieve the data of products using this endpoint.
 
 | Parameter | Description | Required |
 | --- | --- | --- |
-| offset | The retrieving offset of products. |  |
+| offset | The offset of retrieving products. |  |
 | count | The number of retrieving products. | |
 
 
@@ -40,7 +40,6 @@ GET /products?offset=3&count=5
 
 | Parameter | Description |
 | --- | --- |
-| data | The array of products. |
 | product.id | The product id. |
 | product.name | The product name. |
 | product.price | The product price. |
