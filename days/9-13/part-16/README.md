@@ -36,9 +36,9 @@ Example
 }
 ```
 
-## API endpoint [GET /me/orders?{paging}]
+## API endpoint [GET /me/orders?{offset,count}]
 
-You can retrieve the data of your orders using this endpoint. If there comes more than one page of data, please use the returned page token to keep requesting more data.
+You can retrieve the data of your orders using this endpoint.
 
 ### Request
 
@@ -52,7 +52,8 @@ You can retrieve the data of your orders using this endpoint. If there comes mor
 
 | Parameter | Description | Required |
 | --- | --- | --- |
-| paging | A page token. |  |
+| offset | The offset of retrieving orders. | |
+| count | The number of retrieving orders. | |
 
 Example
 
@@ -64,8 +65,8 @@ GET /orders
 Example
 
 ```
-// For the certain page of orders.
-GET /orders?paging=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI1OGZlYjIxNzcyZTYyYjEwYTdlN2QxOGMiLCJsaW1pdCI6MTAsIm9mZnNldCI6MTAsInR5cGUiOiJwYWdlIiwidmVyc2lvbiI6IjEuMCJ9.jBzB-49t8e0t0irN0KBoXg-pjqBrlIixqnydLxsB9qc
+// For the certain offset and count of orders.
+GET /orders?offset=3&count=5
 ```
 
 ### Response 200 (application/json)
@@ -74,7 +75,6 @@ GET /orders?paging=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI1OGZlYjIxNzcy
 
 | Parameter | Description |
 | --- | --- |
-| data | The array of orders. |
 | order.id | The order id. |
 | order.items | The items in the order. |
 | order.buyer | The buyer of the order. |
@@ -121,10 +121,7 @@ Example
       },
       "created": "2017-06-10T06:05:40.000Z"
     }
-  ],
-  "paging": {
-    "next": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI1OGZlYjIxNzcyZTYyYjEwYTdlN2QxOGMiLCJsaW1pdCI6MTAsIm9mZnNldCI6MTAsInR5cGUiOiJwYWdlIiwidmVyc2lvbiI6IjEuMCJ9.jBzB-49t8e0t0irN0KBoXg-pjqBrlIixqnydLxsB9qc"
-  }
+  ]
 }
 ```
 
@@ -133,7 +130,7 @@ Example
 ![Controller/Profile/Normal/Purchased Without Tab Bar](../../../resources/images/controller/profile/normal/purchased-without-tab-bar.png)
 
 1. Please implement the UI. See details on the [Zeplin](https://zpl.io/bzYXEeG).
-2. Please implement the `GET /me` and `GET /me/orders?{paging}` APIs. **DO NOT** forget the load-more functionality.
+2. Please implement the `GET /me` and `GET /me/orders?{offset,count}` APIs. **DO NOT** forget the load-more functionality.
 
 ### Note
 
