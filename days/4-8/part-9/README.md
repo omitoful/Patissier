@@ -1,8 +1,8 @@
 # Part.9
 
-## API endpoint [GET /products?{paging}]
+## API endpoint [GET /products?{offset,count}]
 
-You can retrieve the data of products using this endpoint. If there comes more than one page of data, please use the returned page token to keep requesting more data.
+You can retrieve the data of products using this endpoint.
 
 ### Request
 
@@ -16,7 +16,8 @@ You can retrieve the data of products using this endpoint. If there comes more t
 
 | Parameter | Description | Required |
 | --- | --- | --- |
-| paging | A page token. |  |
+| offset | The retrieving offset of products. |  |
+| count | The number of retrieving products. | |
 
 
 Example
@@ -29,8 +30,8 @@ GET /products
 Example 
 
 ```
-// For the certain page of products.
-GET /products?paging=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI1OGZlYjIxNzcyZTYyYjEwYTdlN2QxOGMiLCJsaW1pdCI6MTAsIm9mZnNldCI6MTAsInR5cGUiOiJwYWdlIiwidmVyc2lvbiI6IjEuMCJ9.jBzB-49t8e0t0irN0KBoXg-pjqBrlIixqnydLxsB9qc
+// For the certain offset and count of products.
+GET /products?offset=3&count=5
 ```
 
 ### Response 200 (application/json)
@@ -43,7 +44,6 @@ GET /products?paging=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI1OGZlYjIxNz
 | product.id | The product id. |
 | product.name | The product name. |
 | product.price | The product price. |
-| paging.next | The next page token. |
 
 Example
 
@@ -60,10 +60,7 @@ Example
       "name": "Puff",
       "price": 45
     }
-  ],
-  "paging": {
-    "next": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI1OGZlYjIxNzcyZTYyYjEwYTdlN2QxOGMiLCJsaW1pdCI6MTAsIm9mZnNldCI6MTAsInR5cGUiOiJwYWdlIiwidmVyc2lvbiI6IjEuMCJ9.jBzB-49t8e0t0irN0KBoXg-pjqBrlIixqnydLxsB9qc"
-  }
+  ]
 }
 ```
 
