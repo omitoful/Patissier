@@ -58,7 +58,7 @@ Example
   "items": [
     {
       "id": "591f03ad623394fae007fbf8",
-      "type": "product",
+      "type": "PRODUCT",
       "quantity": 2
     }
   ],
@@ -66,10 +66,10 @@ Example
     "phone_number": "0987654321",
     "first_name": "Roy",
     "last_name": "Hsu",
-    "title": "mister"
+    "title": "MISTER"
   },
   "shipping": {
-    "service": "post-office",
+    "service": "POST_OFFICE",
     "postal_code": "110",
     "city": "Taipei",
     "address": "No.7, Sec. 5, Xinyi Rd., Xinyi Dist."
@@ -130,10 +130,10 @@ Example
 {
   "payment_method": "CREDIT_CARD",
   "credit_card": {
-    "number": "1234-1234-1234-1234",
+    "number": "1234123412341234",
     "expiration_month": 12,
     "expiration_year": 2017,
-    "code": 123
+    "code": "123"
   }
 }
 ```
@@ -172,7 +172,7 @@ Please **DO NOT** use a read credit card to process the checkout. The server cur
 
 ```
 // The demo credit card.
-Number: 1234-1234-1234-1234
+Number: 1234123412341234
 Expiration Year: < current year >
 Expiration Month: 12
 Code: 123
