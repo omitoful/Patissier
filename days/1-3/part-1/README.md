@@ -2,6 +2,8 @@
 
 ## Learning Git and GitHub
 
+NOTE: You must use the git commands with the **terminal**. DO NOT using any GUI tools for git in the entire iOS class.
+
 * [Try git](https://try.github.io)
 * [GitHub Guides](https://guides.github.com)
 * [GitHub Training & Guides](https://www.youtube.com/watch?v=FyfwLX4HAxM&list=PLg7s6cbtAD15G8lNyoaYDuKZSKyJrgwB-&index=1) (Video)
@@ -37,7 +39,7 @@ part-3
 1. Please make your first commit for the changes using git.
 2. Please push the current assignment branch to the origin.
 
-## How to hand-in assigments?
+## How to hand-in assignments?
 
 Please find the assignment branch on your origin and make a pull request from this branch to **your name branch** of the upstream. (Please make sure never to make a pull request to the master of the upstream)
 
