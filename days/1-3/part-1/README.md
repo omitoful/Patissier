@@ -2,7 +2,7 @@
 
 ## Learning Git and GitHub
 
-NOTE: You must use the git commands with the **terminal**. DO NOT using any GUI tools for git in the entire iOS class.
+NOTE: You must use git commands with the **terminal**. DO NOT use any GUI tools for git in the entire iOS class.
 
 * [Try git](https://try.github.io)
 * [GitHub Guides](https://guides.github.com)
