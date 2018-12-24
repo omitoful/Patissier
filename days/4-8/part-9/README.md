@@ -50,14 +50,14 @@ Example
 {
   "data": [
     {
-      "id": "591f03ad623394fae007fbf8",
+      "id": "A1269A6F-DB44-44C5-AF98-8628EC099868",
       "name": "Chocolate Cake",
       "price": 120
     },
     {
-      "id": "591f03c1623394fae007fbf9",
-      "name": "Puff",
-      "price": 45
+      "id": "BFC07003-22E8-4C55-A57F-A5064FA6F2BE",
+      "name": "Lollipop",
+      "price": 75
     }
   ]
 }

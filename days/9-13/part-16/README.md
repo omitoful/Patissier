@@ -28,7 +28,7 @@ Example
 ```json
 {
   "data": {
-    "id": "59412c0989634bbf741cc2fb",
+    "id": "967EECD7-2FF9-4355-AF3F-39E96AFFACEB",
     "first_name": "Roy",
     "last_name": "Hsu",
     "name": "Roy Hsu"
@@ -77,11 +77,7 @@ GET /orders?offset=3&count=5
 | --- | --- |
 | order.id | The order id. |
 | order.items | The items in the order. |
-| order.buyer | The buyer of the order. |
-| order.recipient | The recipient of the order. |
-| order.shipping | The shipping for the order. |
 | order.total_amount | The total amount of the order. |
-| order.transaction | The transaction for the order. |
 | order.created | The created date of the order. |
 | paging.next | The next page token. |
 
@@ -91,36 +87,16 @@ Example
 {
   "data": [
     {
-      "id": "593805e6907b4e44fe9467f8",
+      "id": "57ED2EB3-01CD-4149-A5C1-02F99994B091",
       "items": [
         {
-          "id": "591f03ad623394fae007fbf8",
+          "id": "FC2E838E-9372-4760-BD89-101D5A8064B9",
           "type": "PRODUCT",
           "quantity": 2
         }
-      ],
-      "buyer": {
-        "id": "59412c0989634bbf741cc2fb"
-      },
-      "recipient": {
-        "phone_number": "0987654321",
-        "first_name": "Roy",
-        "last_name": "Hsu",
-        "title": "MISTER"
-      },
-      "shipping": {
-        "service": "POST_OFFICE",
-        "postal_code": "110",
-        "city": "Taipei",
-        "address": "No.7, Sec. 5, Xinyi Rd., Xinyi Dist."
-      },
-      "total_amount": 20,
-      "transaction": {
-        "id": "59380600907b4e44ff9467f8",
-        "payment_method": "CREDIT_CARD"
-      },
-      "created": "2017-06-10T06:05:40.000Z"
-    }
+      ]
+      "total_amount": 200,
+      "created": "2018-11-26T11:04:06.134Z"
   ]
 }
 ```

@@ -57,7 +57,7 @@ Example
 {
   "items": [
     {
-      "id": "591f03ad623394fae007fbf8",
+      "id": "FC2E838E-9372-4760-BD89-101D5A8064B9",
       "type": "PRODUCT",
       "quantity": 2
     }
@@ -90,7 +90,7 @@ Example
 ```json
 {
   "data": {
-    "id": "5931794f1606036128fe0bb8"
+    "id": "57ED2EB3-01CD-4149-A5C1-02F99994B091"
   }
 }
 ```
@@ -151,7 +151,7 @@ Example
 ```json
 {
   "data": {
-    "transaction_id": "593179751606036129fe0bb8"
+    "transaction_id": "201B62A1-630A-405B-A1F9-B9001E3C6081"
   }
 }
 ```
@@ -168,7 +168,7 @@ Example
 
 ### Note
 
-Please **DO NOT** use a read credit card to process the checkout. The server currently and only accepts the demo credit card listing below.
+Please **DO NOT** use a real credit card to process the checkout. The server currently and only accepts the demo credit card listing below.
 
 ```
 // The demo credit card.

@@ -27,7 +27,7 @@ Example
 ```json
 {
   "data": {
-    "id": "591f03ad623394fae007fbf8",
+    "id": "A1269A6F-DB44-44C5-AF98-8628EC099868",
     "name": "Chocolate Cake",
     "price": 120
   }
@@ -57,13 +57,13 @@ Example
 
 ```
 // For the first page of comments.
-GET /products/591f03ad623394fae007fbf8/comments
+GET /products/A1269A6F-DB44-44C5-AF98-8628EC099868/comments
 ```
 Example
 
 ```
 // For the certain offset and count of comments.
-GET /products/591f03ad623394fae007fbf8/comments?offset=3&count=5
+GET /products/A1269A6F-DB44-44C5-AF98-8628EC099868/comments?offset=3&count=5
 ```
 
 ### Response 200 (application/json)
@@ -82,11 +82,11 @@ Example
 {
   "data": [
     {
-      "id": "593b8e6473a7f08ded3e8266",
+      "id": "BEF48842-0EA1-4B42-9014-E523225C6684",
       "text": "Awesome!",
       "user": {
-        "id": "59412c0989634bbf741cc2fb",
-        "name": "Roy Hsu"
+        "id": "6D280BEB-6413-49B4-80D1-7028B6CC3823",
+        "name": "Carolyn Simmons"
       }
     }
   ]
