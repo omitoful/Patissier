@@ -8,9 +8,9 @@
 
 * [Cocoapods](https://cocoapods.org)
 
-## Atom
+## Text Editor
 
-* [Atom](https://atom.io)
+* [Visual Studio Code](https://code.visualstudio.com)
 
 ## Assignment
 
@@ -20,5 +20,5 @@
 
 ## Note
 
-Please download the plain text editor Atom for editing `Podfile`.
+Please download the text editor Visual Studio Code for editing `Podfile`.
 DO NOT to use the built-in TextEdit app of macOS.
