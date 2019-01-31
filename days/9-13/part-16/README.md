@@ -97,6 +97,7 @@ Example
       ]
       "total_amount": 200,
       "created": "2018-11-26T11:04:06.134Z"
+    }
   ]
 }
 ```
