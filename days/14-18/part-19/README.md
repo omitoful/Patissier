@@ -10,7 +10,7 @@
 ![Controller/Landing/Normal/Sign In](../../../resources/images/controller/landing/normal/sign-in.png)
 
 1. Please implement the UI. See details on the [Zeplin](https://zpl.io/bzYXEeG).
-2. Please sign out the current user when selecting the exit button (on the top-left corner) in profile. The app should show sign-in UI after a user did sign out.
+2. Please sign out the current user when selecting the exit button (on the top-right corner) in profile. The app should show sign-in UI after a user did sign out.
 
 ### Note
 
