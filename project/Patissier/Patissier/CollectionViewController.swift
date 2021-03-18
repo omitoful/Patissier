@@ -7,6 +7,7 @@
 
 import UIKit
 import Foundation
+import Alamofire
 
 //struct Property {
 //
@@ -22,7 +23,23 @@ struct Product {
 }
 
 class CollectionViewController: UICollectionViewController,UICollectionViewDelegateFlowLayout,ProductManagerDelegate {
-
+    
+    // Alamofire
+//    func requestNewData() -> Void {
+//        let headers: HTTPHeaders = [
+//            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiIyNkEwNUUzMC1FNkI2LTQwRjUtQjY5My1BQjc5MkI5MEM5MzIiLCJpc3MiOiIyM0RCREJERS05QUZFLTRDREQtOUVEQS0xMjU2M0RDNUM0NDMifQ.iEqda8kAT4jr2jBHEuLOlKLRK7-5GDpNPC9CyQRhCbY"
+//        ]
+//        let newData = AF.request("https://api.tinyworld.cc/patissier/v1/products?offset=3&count=5",headers: headers).responseJSON { response in
+//            debugPrint("Response: \(response.result)")
+//        }
+//
+//
+//        return ()
+//    }
+//
+    
+    
+    
     func manager(_ manager: ProductManager, didFetch products: [Product]) -> Void {
         
         self.products = products
@@ -33,6 +50,20 @@ class CollectionViewController: UICollectionViewController,UICollectionViewDeleg
                 return ()
             }
         )
+        
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiIyNkEwNUUzMC1FNkI2LTQwRjUtQjY5My1BQjc5MkI5MEM5MzIiLCJpc3MiOiIyM0RCREJERS05QUZFLTRDREQtOUVEQS0xMjU2M0RDNUM0NDMifQ.iEqda8kAT4jr2jBHEuLOlKLRK7-5GDpNPC9CyQRhCbY"
+        ]
+        let newData = AF.request("https://api.tinyworld.cc/patissier/v1/products?offset=3&count=5",headers: headers)
+            .responseJSON { response in
+                debugPrint(response)
+                }
+//        if let json: Any = AFResult.success(<#_#>) {
+//            print(json)
+//        } else {
+//            print("No newData")
+//        }
         return ()
     }
 
@@ -57,6 +88,8 @@ class CollectionViewController: UICollectionViewController,UICollectionViewDeleg
 
         productmanerger.delegate = production
         let _ = productmanerger.fetchProducts()
+        
+        
 //        self.collectionView.reloadData()
 //        gradient.colors = [leftColor,rightColor]
 //        gradient.locations = [0.0 , 1.0]
@@ -120,14 +153,15 @@ class ProductManager {
             URLQueryItem(name: "offset", value: "3"),
             URLQueryItem(name: "count", value: "5")
         ]
-        
         if let productEndpoint: URL = productComponent.url {
             var productReq = URLRequest(url: productEndpoint)
             
             let userDefault = UserDefaults.standard
             if let token = userDefault.value(forKey: "Token") {
+                
                 productReq.httpMethod = "GET"
                 productReq.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+//                print("Bearer \(token)")
                 
                 let productSession = URLSession.shared
 
