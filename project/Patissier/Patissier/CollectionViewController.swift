@@ -41,7 +41,6 @@ class CollectionViewController: UICollectionViewController,UICollectionViewDeleg
 
         return ()
     }
-
     
     var gradient: CAGradientLayer = CAGradientLayer()
     let leftColor = UIColor.blue.withAlphaComponent(0.7).cgColor
@@ -76,7 +75,6 @@ class CollectionViewController: UICollectionViewController,UICollectionViewDeleg
         
         return () // Void.init()
     }
-
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         print(self.products.count)
@@ -95,7 +93,6 @@ class CollectionViewController: UICollectionViewController,UICollectionViewDeleg
             let cell: UICollectionViewCell = UICollectionViewCell()
             return cell
         }
-    
     }
 }
 
