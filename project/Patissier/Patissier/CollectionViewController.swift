@@ -25,18 +25,74 @@ struct Product {
 class CollectionViewController: UICollectionViewController,UICollectionViewDelegateFlowLayout,ProductManagerDelegate {
     
     // Alamofire
-//    func requestNewData() -> Void {
-//        let headers: HTTPHeaders = [
-//            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiIyNkEwNUUzMC1FNkI2LTQwRjUtQjY5My1BQjc5MkI5MEM5MzIiLCJpc3MiOiIyM0RCREJERS05QUZFLTRDREQtOUVEQS0xMjU2M0RDNUM0NDMifQ.iEqda8kAT4jr2jBHEuLOlKLRK7-5GDpNPC9CyQRhCbY"
-//        ]
-//        let newData = AF.request("https://api.tinyworld.cc/patissier/v1/products?offset=3&count=5",headers: headers).responseJSON { response in
-//            debugPrint("Response: \(response.result)")
-//        }
-//
-//
-//        return ()
-//    }
-//
+    func requestNewData() -> Void {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiIyNkEwNUUzMC1FNkI2LTQwRjUtQjY5My1BQjc5MkI5MEM5MzIiLCJpc3MiOiIyM0RCREJERS05QUZFLTRDREQtOUVEQS0xMjU2M0RDNUM0NDMifQ.iEqda8kAT4jr2jBHEuLOlKLRK7-5GDpNPC9CyQRhCbY"
+        ]
+        let _ = AF.request("https://api.tinyworld.cc/patissier/v1/products?offset=3&count=5",headers: headers)
+            .responseJSON { response in
+//                debugPrint(response)
+                let dict: [String: Any]? = response.value as? [String: Any]
+                if let data: [String: Any] = dict {
+                    if let productVal = data["data"] {
+                        if let productArray = productVal as? [[String: Any]] {
+                            
+                            var tpproducts: [Product] = []
+                            for i in 0..<(productArray.count) {
+                                if let TPproductID = productArray[i]["id"] {
+                                    if let id = TPproductID as? String {
+                                        if let TPproductName = productArray[i]["name"] {
+                                            if let name = TPproductName as? String {
+                                                if let TPproductPrice = productArray[i]["price"] {
+                                                    if let price = TPproductPrice as? Int {
+                                                        
+                                                        let product = Product(id: id, name: name, price: price)
+                                                        tpproducts.append(product)
+                                                        
+                                                    } else {
+                                                        print("Price Error")
+                                                        return ()
+                                                    }
+                                                } else {
+                                                    print("No Price")
+                                                    return ()
+                                                }
+                                            } else {
+                                                print("Name Error")
+                                                return ()
+                                            }
+                                        } else {
+                                            print("No Name")
+                                            return ()
+                                        }
+                                    } else {
+                                        print("ID Error")
+                                        return ()
+                                    }
+                                } else {
+                                    print("No ID")
+                                    return ()
+                                }
+                            }
+                            
+                        } else {
+                            print("productVal Error")
+                            return ()
+                        }
+                    } else {
+                        print("No Data")
+                        return ()
+                    }
+                } else {
+                    print("Data Error")
+                    return ()
+                    }
+                }
+        bothProduct.append(contentsOf: products)
+        bothProduct.append(contentsOf: tpproduct)
+        return ()
+    }
+
     
     
     
@@ -50,20 +106,6 @@ class CollectionViewController: UICollectionViewController,UICollectionViewDeleg
                 return ()
             }
         )
-        
-        
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiIyNkEwNUUzMC1FNkI2LTQwRjUtQjY5My1BQjc5MkI5MEM5MzIiLCJpc3MiOiIyM0RCREJERS05QUZFLTRDREQtOUVEQS0xMjU2M0RDNUM0NDMifQ.iEqda8kAT4jr2jBHEuLOlKLRK7-5GDpNPC9CyQRhCbY"
-        ]
-        let newData = AF.request("https://api.tinyworld.cc/patissier/v1/products?offset=3&count=5",headers: headers)
-            .responseJSON { response in
-                debugPrint(response)
-                }
-//        if let json: Any = AFResult.success(<#_#>) {
-//            print(json)
-//        } else {
-//            print("No newData")
-//        }
         return ()
     }
 
@@ -78,6 +120,9 @@ class CollectionViewController: UICollectionViewController,UICollectionViewDeleg
     let rightColor = UIColor.systemBlue.withAlphaComponent(0.7).cgColor
     
     var products: [Product] = []
+    var tpproduct: [Product] = []
+    var bothProduct: [Product] = []
+    var refreshControl = UIRefreshControl.init()
     
     
     override func viewDidLoad() -> Void {
@@ -310,3 +355,11 @@ class ProductManager {
 //gradient
 
 //練習回答問題的時間
+
+func partFourteenData() -> Void {
+    var productIdComponent = URLComponents.init()
+    productIdComponent.scheme = "https"
+    productIdComponent.host = "api.tinyworld.cc"
+    productIdComponent.path = "/patissier/v1/products/:id"
+    
+}
