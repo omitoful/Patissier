@@ -132,7 +132,6 @@ class RootViewController: UIViewController {
 
                                                             let post = Post(title: title)
                                                             // save the Token
-                                                            
                                                             userdefault.set(title, forKey: "Token")
 
                                                             print(post)
