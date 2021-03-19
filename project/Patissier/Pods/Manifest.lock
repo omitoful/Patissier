@@ -10,22 +10,26 @@ PODS:
     - FBSDKLoginKit/Login (= 9.0.1)
   - FBSDKLoginKit/Login (9.0.1):
     - FBSDKCoreKit (~> 9.0.1)
+  - Refreshable (1.2.0)
 
 DEPENDENCIES:
   - Alamofire (~> 5.2)
   - FBSDKLoginKit
+  - Refreshable
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - FBSDKCoreKit
     - FBSDKLoginKit
+    - Refreshable
 
 SPEC CHECKSUMS:
   Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
   FBSDKCoreKit: fada1a6a0076724678993ff05a633848765ff18c
   FBSDKLoginKit: d5ffe6d808897019ccf16feb6f0a7ab260bc5cd6
+  Refreshable: 0f76b6d198178e6cd2823a553fbf4e84a3dba527
 
-PODFILE CHECKSUM: 1d0316770736e643ed76e967f82e4fbf96723b30
+PODFILE CHECKSUM: 0672fc47dbba309aea178e713caa823df0a6371c
 
 COCOAPODS: 1.10.1

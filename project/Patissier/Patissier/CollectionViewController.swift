@@ -8,6 +8,7 @@
 import UIKit
 import Foundation
 import Alamofire
+import Refreshable
 
 //struct Property {
 //
@@ -26,16 +27,39 @@ class CollectionViewController: UICollectionViewController,UICollectionViewDeleg
     
     var products: [Product] = [] // need to take the value out to share to the other funcs
     
+    func loadmore() {
+        self.collectionView.addLoadMore(action: { [weak self] in
+            print("7")
+            self?.collectionView.reloadData()
+        })
+    }
+    
     func manager(_ manager: ProductManager, didFetch products: [Product]) -> Void {
+
+        self.products = products + products
+        print("1")
         
-        self.products = products
-//        print(self.products)
-        let _ = DispatchQueue.main.async (
-            execute: { () -> Void in
-                let _ = self.collectionView.reloadData()
-                return ()
+        DispatchQueue.main.async (
+                execute: { () -> Void in
+                    let _ = self.collectionView.reloadData()
+                    print("2")
+                    return ()
+                }
+            )
+        
+        self.collectionView.addLoadMore(action: { [weak self] in
+            self?.collectionView.reloadData()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2){ () -> Void in
+                self?.products.append(contentsOf: products)
+                self?.collectionView.stopLoadMore()
+                print("10")
             }
-        )
+        })
+        // reload first that wont show up twice though it have already appended,right?
+        // still have a question: If cells isnt out of the view ,it wont work. why? bug?
+        
+        print("3")
         return ()
     }
 
@@ -57,6 +81,7 @@ class CollectionViewController: UICollectionViewController,UICollectionViewDeleg
 
         productmanerger.delegate = production
         let _ = productmanerger.fetchProducts()
+        print("4")
         
         
 //        self.collectionView.reloadData()
@@ -95,6 +120,10 @@ class CollectionViewController: UICollectionViewController,UICollectionViewDeleg
             let cell: UICollectionViewCell = UICollectionViewCell()
             return cell
         }
+    }
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+
+        return 1
     }
 }
 
@@ -184,6 +213,7 @@ class ProductManager {
                                     return ()
                                 }
                             }
+                            
                             self.delegate?.manager(self, didFetch: products)
                             return ()
                             
@@ -397,10 +427,6 @@ class ProductManager {
 
 //練習回答問題的時間
 
-//load more
-
-//3.19 1.add load more
-//     2.replace api with Alamofire
 
 func partFourteenData() -> Void {
     var productIdComponent = URLComponents.init()

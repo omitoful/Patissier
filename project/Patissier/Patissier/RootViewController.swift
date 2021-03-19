@@ -179,8 +179,13 @@ class RootViewController: UIViewController {
 //        let changeVC: UICollectionViewController = CollectionViewController.init()
         
         //用storyboard 初始化
+        let fullScreenSize = UIScreen.main.bounds.size
+        
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let secondVC = storyBoard.instantiateViewController(withIdentifier: "CollectionViewController") as! CollectionViewController
+//        let layout = UICollectionViewFlowLayout()
+//        let collectionView = UICollectionView(frame:CGRect(x:0, y:0,width:fullScreenSize.width, height:fullScreenSize.height),collectionViewLayout:layout)
+        
         
         let navVC: UINavigationController = UINavigationController.init(rootViewController: secondVC)
         secondVC.title = "Patissier"
