@@ -27,13 +27,6 @@ class CollectionViewController: UICollectionViewController,UICollectionViewDeleg
     
     var products: [Product] = [] // need to take the value out to share to the other funcs
     
-    func loadmore() {
-        self.collectionView.addLoadMore(action: { [weak self] in
-            print("7")
-            self?.collectionView.reloadData()
-        })
-    }
-    
     func manager(_ manager: ProductManager, didFetch products: [Product]) -> Void {
 
         self.products = products + products
@@ -49,16 +42,15 @@ class CollectionViewController: UICollectionViewController,UICollectionViewDeleg
         
         self.collectionView.addLoadMore(action: { [weak self] in
             self?.collectionView.reloadData()
-            
+            print("7")
             DispatchQueue.main.asyncAfter(deadline: .now() + 2){ () -> Void in
                 self?.products.append(contentsOf: products)
                 self?.collectionView.stopLoadMore()
-                print("10")
+                print("99")
             }
         })
         // reload first that wont show up twice though it have already appended,right?
         // still have a question: If cells isnt out of the view ,it wont work. why? bug?
-        
         print("3")
         return ()
     }
@@ -82,7 +74,7 @@ class CollectionViewController: UICollectionViewController,UICollectionViewDeleg
         productmanerger.delegate = production
         let _ = productmanerger.fetchProducts()
         print("4")
-        
+        partFourteenData()
         
 //        self.collectionView.reloadData()
 //        gradient.colors = [leftColor,rightColor]
@@ -153,6 +145,9 @@ class ProductManager {
                         if let eachProduct: [[String: Any]] = data["data"] as? [[String: Any]] {
                             
                             var products: [Product] = []
+                            //add id:
+                            var productsID: [String] = []
+                            
                             for i in 0..<(eachProduct.count) {
                                 if let productID = eachProduct[i]["id"] {
                                     if let id = productID as? String {
@@ -163,6 +158,7 @@ class ProductManager {
                                                         
                                                         let product = Product(id: id, name: name, price: price)
                                                         products.append(product)
+                                                        productsID.append(id)
                                                         
                                                     } else {
                                                         enum reqError: Error {
@@ -213,7 +209,9 @@ class ProductManager {
                                     return ()
                                 }
                             }
-                            
+                            //save IDs
+                            userdefault.set(productsID, forKey: "ID")
+                            //==========================================
                             self.delegate?.manager(self, didFetch: products)
                             return ()
                             
@@ -421,7 +419,11 @@ class ProductManager {
 //    }
 //}
 
-//UIimage的值
+//Mon.
+//1. load-more confirm
+//2. Download UIimage part-11
+//3. Check the comments (how to get offset and count)
+//4. complete the UI part-15
 
 //gradient
 
@@ -429,9 +431,26 @@ class ProductManager {
 
 
 func partFourteenData() -> Void {
-    var productIdComponent = URLComponents.init()
-    productIdComponent.scheme = "https"
-    productIdComponent.host = "api.tinyworld.cc"
-    productIdComponent.path = "/patissier/v1/products/:id"
-    
+//    var productIdComponent = URLComponents.init()
+//    productIdComponent.scheme = "https"
+//    productIdComponent.host = "api.tinyworld.cc"
+//    productIdComponent.path = "/patissier/v1/products/:id"
+    let userdefault = UserDefaults.standard
+    if let token = userdefault.value(forKey: "Token") as? String {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(token)"
+        ]
+        if let useID = userdefault.value(forKey: "ID") as? [String] {
+            for i in 0..<(useID.count) {
+                AF.request("https://api.tinyworld.cc/patissier/v1/products/\(useID[i])", headers: headers)
+                    .responseJSON { response in
+                        print("ID response:\(response)")
+                    }
+                AF.request("https://api.tinyworld.cc/patissier/v1/products/\(useID[i])/comments?offset=0&count=0", headers: headers)
+                    .responseJSON { response in
+                        print("Comment response:\(response)")
+                    }
+            }
+        }
+    }
 }
