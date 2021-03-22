@@ -11,11 +11,13 @@ PODS:
   - FBSDKLoginKit/Login (9.0.1):
     - FBSDKCoreKit (~> 9.0.1)
   - Refreshable (1.2.0)
+  - UIScrollView-InfiniteScroll (1.0.2)
 
 DEPENDENCIES:
   - Alamofire (~> 5.2)
   - FBSDKLoginKit
   - Refreshable
+  - UIScrollView-InfiniteScroll (~> 1.0.0)
 
 SPEC REPOS:
   trunk:
@@ -23,13 +25,15 @@ SPEC REPOS:
     - FBSDKCoreKit
     - FBSDKLoginKit
     - Refreshable
+    - UIScrollView-InfiniteScroll
 
 SPEC CHECKSUMS:
   Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
   FBSDKCoreKit: fada1a6a0076724678993ff05a633848765ff18c
   FBSDKLoginKit: d5ffe6d808897019ccf16feb6f0a7ab260bc5cd6
   Refreshable: 0f76b6d198178e6cd2823a553fbf4e84a3dba527
+  UIScrollView-InfiniteScroll: c132d6d5851daff229ab4a1060ccf70a05a051c9
 
-PODFILE CHECKSUM: 0672fc47dbba309aea178e713caa823df0a6371c
+PODFILE CHECKSUM: ef97fdb3644bc5dd5860eb4360115259787875bb
 
 COCOAPODS: 1.10.1

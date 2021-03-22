@@ -9,4 +9,5 @@ target 'Patissier' do
   pod 'FBSDKLoginKit'
   pod 'Alamofire', '~> 5.2'
   pod 'Refreshable'
+  pod 'UIScrollView-InfiniteScroll', '~> 1.0.0'
 end

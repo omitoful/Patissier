@@ -8,7 +8,7 @@
 import UIKit
 import Foundation
 import Alamofire
-import Refreshable
+import UIScrollView_InfiniteScroll
 
 //struct Property {
 //
@@ -23,14 +23,24 @@ struct Product {
     let price: Int
 }
 
-class CollectionViewController: UICollectionViewController,UICollectionViewDelegateFlowLayout,ProductManagerDelegate {
+class CollectionViewController: UICollectionViewController,UICollectionViewDelegateFlowLayout, ProductManagerDelegate {
     
     var products: [Product] = [] // need to take the value out to share to the other funcs
+    var offset: Int = 0
+    var count: Int = 9
+    var productId: String = ""
     
     func manager(_ manager: ProductManager, didFetch products: [Product]) -> Void {
+        
 
-        self.products = products + products
-        print("1")
+        print(self.products)
+        self.products.append(contentsOf: products)
+        print(self.products)
+        self.offset += self.count
+        print("offset:\(self.offset)")
+        // [A(3, 4, 5, 6, 7)]
+        // [A(3, 4, 5, 6, 7),B(3, 4, 5, 6, 7)]
+        // [A(3, 4, 5, 6, 7),B(3, 4, 5, 6, 7),C(3, 4, 5, 6, 7)]
         
         DispatchQueue.main.async (
                 execute: { () -> Void in
@@ -40,19 +50,30 @@ class CollectionViewController: UICollectionViewController,UICollectionViewDeleg
                 }
             )
         
-        self.collectionView.addLoadMore(action: { [weak self] in
-            self?.collectionView.reloadData()
-            print("7")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2){ () -> Void in
-                self?.products.append(contentsOf: products)
-                self?.collectionView.stopLoadMore()
-                print("99")
-            }
-        })
-        // reload first that wont show up twice though it have already appended,right?
-        // still have a question: If cells isnt out of the view ,it wont work. why? bug?
-        print("3")
-        return ()
+        self.collectionView.addInfiniteScroll { (collectionView) -> Void in
+            collectionView.performBatchUpdates({ () -> Void in
+                // update collection view
+                let productManager = ProductManager.init()
+                productManager.delegate = self
+                let _ = productManager.fetchProducts(offset: self.offset, count: self.count)
+                let _ = productManager.fetchproductsComment(productId: self.productId, offset: self.offset, count: self.count)
+                
+            }, completion: { (finished) -> Void in
+                // finish infinite scroll animations
+                    self.collectionView.finishInfiniteScroll()
+                    self.collectionView.setShouldShowInfiniteScrollHandler { _ -> Bool in
+                        return false
+                }
+            })
+        }
+                //[A(3, 4, 5, 6, 7)]
+                //[B(3, 4, 5, 6, 7)]
+    //            self?.products.append(contentsOf: products)
+                //[A(3, 4, 5, 6, 7), A(3, 4, 5, 6, 7)]
+                //[B(3, 4, 5, 6, 7), B(3, 4, 5, 6, 7)]
+                
+    //            ProductManager().fetchProducts()
+    //            ProductManager.fetchProducts()
     }
 
     func manager(_ manager: ProductManager, didFailWith error: Error) -> Void {
@@ -72,9 +93,11 @@ class CollectionViewController: UICollectionViewController,UICollectionViewDeleg
         let production: ProductManagerDelegate = self
 
         productmanerger.delegate = production
-        let _ = productmanerger.fetchProducts()
+//        productmanerger.delegate = self
+        let _ = productmanerger.fetchProducts(offset: self.offset, count: self.count)
+        let _ = productmanerger.fetchproductsComment(productId: self.productId, offset: self.offset, count: self.count)
         print("4")
-        partFourteenData()
+//        partFourteenData()
         
 //        self.collectionView.reloadData()
 //        gradient.colors = [leftColor,rightColor]
@@ -119,6 +142,7 @@ class CollectionViewController: UICollectionViewController,UICollectionViewDeleg
     }
 }
 
+// class Lion {}
 protocol ProductManagerDelegate: AnyObject {
     
     func manager(_ manager: ProductManager, didFetch products: [Product])
@@ -129,24 +153,26 @@ protocol ProductManagerDelegate: AnyObject {
 class ProductManager {
     static let shared = ProductManager.init()
     
+//    weak var lion: Lion?
+    
     weak var delegate: ProductManagerDelegate?
     
-    func fetchProducts() -> Void {
+    func fetchProducts(offset: Int, count: Int) -> Void {
         // Alamofire
         let userdefault = UserDefaults.standard
+        
+        
         if let token = userdefault.value(forKey: "Token") as? String {
             let headers: HTTPHeaders = [
                 "Authorization": "Bearer \(token)"
             ]
-            AF.request("https://api.tinyworld.cc/patissier/v1/products?offset=3&count=5",headers: headers)
+            AF.request("https://api.tinyworld.cc/patissier/v1/products?offset=\(offset)&count=\(count)",headers: headers)
                 .responseJSON { response in
 //                    print(response)
                     if let data: [String: Any] = response.value as? [String: Any] {
                         if let eachProduct: [[String: Any]] = data["data"] as? [[String: Any]] {
                             
                             var products: [Product] = []
-                            //add id:
-                            var productsID: [String] = []
                             
                             for i in 0..<(eachProduct.count) {
                                 if let productID = eachProduct[i]["id"] {
@@ -158,7 +184,6 @@ class ProductManager {
                                                         
                                                         let product = Product(id: id, name: name, price: price)
                                                         products.append(product)
-                                                        productsID.append(id)
                                                         
                                                     } else {
                                                         enum reqError: Error {
@@ -198,7 +223,7 @@ class ProductManager {
                                         }
                                         let error: reqError = reqError.idError
                                         self.delegate?.manager(self, didFailWith: error)
-                                        return ()
+                                        return () // completionHandler
                                     }
                                 } else {
                                     enum reqError: Error {
@@ -206,14 +231,13 @@ class ProductManager {
                                     }
                                     let error: reqError = reqError.noID
                                     self.delegate?.manager(self, didFailWith: error)
-                                    return ()
+                                    return () // completionHandler
                                 }
                             }
-                            //save IDs
-                            userdefault.set(productsID, forKey: "ID")
-                            //==========================================
+                            // self.lion.makeSounds()
+                            // delegate === collectionViewController
                             self.delegate?.manager(self, didFetch: products)
-                            return ()
+                            return () // completionHandler
                             
                         } else {
                             enum reqError: Error {
@@ -221,7 +245,7 @@ class ProductManager {
                             }
                             let error: reqError = reqError.noData
                             self.delegate?.manager(self, didFailWith: error)
-                            return ()
+                            return () // completionHandler
                         }
                     } else {
                         enum reqError: Error {
@@ -229,9 +253,21 @@ class ProductManager {
                         }
                         let error: reqError = reqError.dataError
                         self.delegate?.manager(self, didFailWith: error)
-                        return ()
+                        return () // completionHandler
                     }
                 }
+            
+//            AF.request("https://api.tinyworld.cc/patissier/v1/products/\(productId)",headers: headers)
+//                .responseJSON { response in
+//                    print("ID response: \(response)")
+//                }
+//
+//            AF.request("https://api.tinyworld.cc/patissier/v1/products/A1269A6F-DB44-44C5-AF98-8628EC099868/comments?offset=\(offset)&count=\(count)",headers: headers)
+//                .responseJSON { response in
+//                    print("comments response: \(response)")
+//                }
+
+            return () // for fetchProducts()
         } else {
             enum reqError: Error {
                 case tokenError
@@ -240,7 +276,59 @@ class ProductManager {
             self.delegate?.manager(self, didFailWith: error)
             return ()
         }
-        return ()
+    }
+    
+    
+    func fetchproductsComment(productId: String, offset: Int, count: Int) -> Void {
+        let userdefault = UserDefaults.standard
+        if let token = userdefault.value(forKey: "Token") as? String {
+            let headers: HTTPHeaders = ["Authorization": "Bearer \(token)"]
+            AF.request("https://api.tinyworld.cc/patissier/v1/products/\(productId)", headers: headers)
+                .responseJSON { response in
+//                    print("productId: \(response)")
+                    if let data: [String: Any] = response.value as? [String: Any] {
+                        if let eachData: [[String: Any]] = data["data"] as? [[String: Any]] {
+                            if let productID = eachData[0]["id"] {
+                            
+                            
+                            
+                            AF.request("https://api.tinyworld.cc/patissier/v1/products/\(productID)/comments?offset=\(offset)&count=\(count)",headers: headers)
+                                .responseJSON { response in
+                                    print("comments response: \(response)")
+                                }
+                            
+                            
+                            
+                            } else {
+                                enum reqError: Error {
+                                    case NoID
+                                }
+                                let error: reqError = reqError.NoID
+                                self.delegate?.manager(self, didFailWith: error)
+                            }
+                        } else {
+                            enum reqError: Error {
+                                case DataError
+                            }
+                            let error: reqError = reqError.DataError
+                            self.delegate?.manager(self, didFailWith: error)
+                        }
+                    } else {
+                        enum reqError: Error {
+                            case noData
+                        }
+                        let error: reqError = reqError.noData
+                        self.delegate?.manager(self, didFailWith: error)
+                    }
+                }
+
+        } else {
+            enum reqError: Error {
+                case noToken
+            }
+            let error: reqError = reqError.noToken
+            self.delegate?.manager(self, didFailWith: error)
+        }
     }
 }
 
@@ -420,37 +508,14 @@ class ProductManager {
 //}
 
 //Mon.
-//1. load-more confirm
-//2. Download UIimage part-11
-//3. Check the comments (how to get offset and count)
-//4. complete the UI part-15
+//1. Download UIimage part-11
+//2. complete the UI part-15
+//Tue.
+//1. add tableView
+//2. part-16
 
-//gradient
+// gradient
+
+// load-more still need to debug
 
 //練習回答問題的時間
-
-
-func partFourteenData() -> Void {
-//    var productIdComponent = URLComponents.init()
-//    productIdComponent.scheme = "https"
-//    productIdComponent.host = "api.tinyworld.cc"
-//    productIdComponent.path = "/patissier/v1/products/:id"
-    let userdefault = UserDefaults.standard
-    if let token = userdefault.value(forKey: "Token") as? String {
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(token)"
-        ]
-        if let useID = userdefault.value(forKey: "ID") as? [String] {
-            for i in 0..<(useID.count) {
-                AF.request("https://api.tinyworld.cc/patissier/v1/products/\(useID[i])", headers: headers)
-                    .responseJSON { response in
-                        print("ID response:\(response)")
-                    }
-                AF.request("https://api.tinyworld.cc/patissier/v1/products/\(useID[i])/comments?offset=0&count=0", headers: headers)
-                    .responseJSON { response in
-                        print("Comment response:\(response)")
-                    }
-            }
-        }
-    }
-}
