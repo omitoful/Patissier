@@ -7,7 +7,14 @@
 
 import UIKit
 
+// let cell can Push
+protocol PushDelegate: AnyObject {
+    func pushNewView(_ manager: CollectionViewCell) -> Void
+}
+
+
 class CollectionViewCell: UICollectionViewCell {
+
     @IBOutlet weak var label1: UILabel!
     @IBOutlet weak var productNameLabel: UILabel!
     @IBOutlet weak var productPriceLabel: UILabel!
@@ -41,23 +48,69 @@ class CollectionViewCell: UICollectionViewCell {
 //        iconPic.tintColor = .gray
     }
     
+    weak var delegate: PushDelegate?
+    
+    @IBAction func tapToDetails(_ sender: Any) {
+        
+        print("Tap details")
+        self.delegate?.pushNewView(self)
+        
+    }
 }
+        
+//        self.pushNewView()
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let detailVC = storyboard.instantiateViewController(withIdentifier: "CellDetailTableViewController") as! CellDetailTableViewController
+//        
+//        // CollectionViewController.swift
+//        if let navigationController: UINavigationController = self.navigationController {
+//            navigationController.push(detailVC, animated: true)
+//        } else {
+//            print("No navigation found.")
+//        }
+        
+   
+        
+//        let navVC1: UINavigationController = UINavigationController.init(rootViewController: detailVC)
+//        let anotherVC = UICollectionViewController()
+//        let navVC2 = UINavigationController(rootViewController: anotherVC)
+//        detailVC.title = "Product"
+//
+//
+//
+////        navVC.pushViewController(anotherVC, animated: true)
+//
+//
+//        if let n2 = anotherVC.navigationController {
+//            print("A")
+//            n2 === navVC2
+//            let n1 = detailVC.navigationController
+//            n1 === navVC1
+//            n2.pushViewController(detailVC, animated: true)
+//        } else {
+//            print("B")
+//        }
+////        anotherVC.navigationController?.pushViewController(detailVC, animated: true)
+//
+//        anotherVC.navigationController?.pushViewController(detailVC, animated: true)
+//
+//
+//
+//
+//
+//        anotherVC.navigationController?.pushViewController(detailVC, animated: true)
+//
 
-func tappedInImage() -> Void {
-    
-    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    let detailVC = storyboard.instantiateViewController(withIdentifier: "CellDetailTableViewController")
-    let navVC: UINavigationController = UINavigationController.init(rootViewController: detailVC)
-    detailVC.title = "Patissier"
-    detailVC.navigationController?.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: UIFont(name: "Hoefler Text", size: 10) as Any]
-    detailVC.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
-    detailVC.navigationController?.navigationBar.isTranslucent = true
-    detailVC.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-    detailVC.navigationController?.navigationBar.shadowImage = UIImage()
-    detailVC.navigationController?.navigationBar.barTintColor = .clear
-    
-    navVC.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
-    
-    
-    return ()
-}
+        
+//        detailVC.navigationController?.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: UIFont(name: "Hoefler Text", size: 10) as Any]
+//        detailVC.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+//        detailVC.navigationController?.navigationBar.isTranslucent = true
+//        detailVC.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        detailVC.navigationController?.navigationBar.shadowImage = UIImage()
+//        detailVC.navigationController?.navigationBar.barTintColor = .clear
+//
+//        navVC.modalPresentationStyle = .fullScreen
+        
+        
+        // missing
+//        self.present(navVC, animated: true)
