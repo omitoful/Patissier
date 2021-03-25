@@ -12,6 +12,8 @@ import Alamofire
 protocol ProductManagerDelegate: AnyObject {
     
     func manager(_ manager: ProductManager, didFetch products: [Product])
+    
+    func manager(_ manager: ProductManager, didFetch products: [ProductComments])
 
     func manager(_ manager: ProductManager, didFailWith error: Error)
 }
@@ -19,10 +21,10 @@ protocol ProductManagerDelegate: AnyObject {
 class ProductManager {
     static let shared = ProductManager.init()
     
-//    weak var lion: Lion?
+//  weak var lion: Lion?
     
     weak var delegate: ProductManagerDelegate? = nil
-    var age = 10
+    //指派
     
     func fetchProducts(offset: Int, count: Int) -> Void {
         // Alamofire
@@ -127,17 +129,6 @@ class ProductManager {
                         return () // completionHandler
                     }
                 }
-            
-//            AF.request("https://api.tinyworld.cc/patissier/v1/products/\(productId)",headers: headers)
-//                .responseJSON { response in
-//                    print("ID response: \(response)")
-//                }
-//
-//            AF.request("https://api.tinyworld.cc/patissier/v1/products/A1269A6F-DB44-44C5-AF98-8628EC099868/comments?offset=\(offset)&count=\(count)",headers: headers)
-//                .responseJSON { response in
-//                    print("comments response: \(response)")
-//                }
-
             return () // for fetchProducts()
         } else {
             enum reqError: Error {
@@ -149,50 +140,60 @@ class ProductManager {
         }
     }
     
-    
-    func fetchproductsComment(productId: String, offset: Int, count: Int) -> Void {
+    func fetchProductDetail(productId: String) -> Void {
         let userdefault = UserDefaults.standard
         if let token = userdefault.value(forKey: "Token") as? String {
             let headers: HTTPHeaders = ["Authorization": "Bearer \(token)"]
             AF.request("https://api.tinyworld.cc/patissier/v1/products/\(productId)", headers: headers)
                 .responseJSON { response in
-//                    print("productId: \(response)")
+                    
+                    var eachProducts: Product
                     if let data: [String: Any] = response.value as? [String: Any] {
-                        if let eachData: [[String: Any]] = data["data"] as? [[String: Any]] {
-                            if let productID = eachData[0]["id"] {
-                            
-                            
-                            
-                            AF.request("https://api.tinyworld.cc/patissier/v1/products/\(productID)/comments?offset=\(offset)&count=\(count)",headers: headers)
-                                .responseJSON { response in
-//                                    print("comments response: \(response)")
+                        if let dataItem: [String: Any] = data["data"] as? [String: Any] {
+                            if let dataId: String = dataItem["id"] as? String {
+                                if let dataName: String = dataItem["name"] as? String {
+                                    if let dataPrice: Int = dataItem["price"] as? Int {
+                                        
+                                        eachProducts = Product(id: dataId, name: dataName, price: dataPrice)
+//                                        print(eachProducts)
+                                        self.delegate?.manager(self, didFetch: [eachProducts])
+                                        
+                                    } else {
+                                        enum reqError: Error {
+                                            case noPrice
+                                        }
+                                        let error: reqError = reqError.noPrice
+                                        self.delegate?.manager(self, didFailWith: error)
+                                    }
+                                } else {
+                                    enum reqError: Error {
+                                        case noName
+                                    }
+                                    let error: reqError = reqError.noName
+                                    self.delegate?.manager(self, didFailWith: error)
                                 }
-                            
-                            
-                            
                             } else {
                                 enum reqError: Error {
-                                    case NoID
+                                    case noID
                                 }
-                                let error: reqError = reqError.NoID
+                                let error: reqError = reqError.noID
                                 self.delegate?.manager(self, didFailWith: error)
                             }
                         } else {
                             enum reqError: Error {
-                                case DataError
+                                case noItem
                             }
-                            let error: reqError = reqError.DataError
+                            let error: reqError = reqError.noItem
                             self.delegate?.manager(self, didFailWith: error)
                         }
                     } else {
                         enum reqError: Error {
-                            case noData
+                            case dataError
                         }
-                        let error: reqError = reqError.noData
+                        let error: reqError = reqError.dataError
                         self.delegate?.manager(self, didFailWith: error)
                     }
                 }
-
         } else {
             enum reqError: Error {
                 case noToken
@@ -201,6 +202,129 @@ class ProductManager {
             self.delegate?.manager(self, didFailWith: error)
         }
     }
+    
+    func fetchproductsComment(productId: String, offset: Int, count: Int) -> Void {
+        let userdefault = UserDefaults.standard
+        if let token = userdefault.value(forKey: "Token") as? String {
+            let headers: HTTPHeaders = ["Authorization": "Bearer \(token)"]
+            AF.request("https://api.tinyworld.cc/patissier/v1/products/\(productId)/comments?offset=\(offset)&count=\(count)",headers: headers)
+                    .responseJSON { response in
+//                        print("comments response: \(response)")
+                        if let commentData: [String: Any] = response.value as? [String: Any] {
+                            if let eachCommentData: [[String: Any]] = commentData["data"] as? [[String: Any]] {
+                                
+                                var productComments: [ProductComments] = []
+                                for j in 0..<(eachCommentData.count) {
+                                    if let commentText = eachCommentData[j]["text"] {
+                                        if let text = commentText as? String {
+
+                                            if let userInfo: [String: Any] = eachCommentData[j]["user"] as? [String: Any] {
+                                                if let userID = userInfo["id"] {
+                                                    if let userId = userID as? String {
+                                                        if let userNAME = userInfo["name"] {
+                                                            if let userName = userNAME as? String {
+                                                                if let commentID = eachCommentData[j]["id"] {
+                                                                    if let id = commentID as? String {
+
+
+                                                                        let productComment = [ProductComments(productID: productId, commenmtID: id, text: text, userID: userId, userName: userName)]
+                                                                        productComments.append(contentsOf: productComment)
+//                                                                        print("comments \(productComments)")
+
+                                                                    } else {
+                                                                        enum reqError: Error {
+                                                                            case noCommentID
+                                                                        }
+                                                                        let error: reqError = reqError.noCommentID
+                                                                        self.delegate?.manager(self, didFailWith: error)
+                                                                    }
+                                                                } else {
+                                                                    enum reqError: Error {
+                                                                        case noCommentID
+                                                                    }
+                                                                    let error: reqError = reqError.noCommentID
+                                                                    self.delegate?.manager(self, didFailWith: error)
+                                                                }
+                                                            } else {
+                                                                enum reqError: Error {
+                                                                    case userNameTypeError
+                                                                }
+                                                                let error: reqError = reqError.userNameTypeError
+                                                                self.delegate?.manager(self, didFailWith: error)
+                                                            }
+                                                        } else {
+                                                            enum reqError: Error {
+                                                                case noUserNAME
+                                                            }
+                                                            let error: reqError = reqError.noUserNAME
+                                                            self.delegate?.manager(self, didFailWith: error)
+                                                        }
+                                                    } else {
+                                                        enum reqError: Error {
+                                                            case userIDTypeError
+                                                        }
+                                                        let error: reqError = reqError.userIDTypeError
+                                                        self.delegate?.manager(self, didFailWith: error)
+                                                    }
+                                                } else {
+                                                    enum reqError: Error {
+                                                        case noUserID
+                                                    }
+                                                    let error: reqError = reqError.noUserID
+                                                    self.delegate?.manager(self, didFailWith: error)
+                                                }
+                                            } else {
+                                                enum reqError: Error {
+                                                    case userError
+                                                }
+                                                let error: reqError = reqError.userError
+                                                self.delegate?.manager(self, didFailWith: error)
+                                            }
+        
+                                        } else {
+                                            enum reqError: Error {
+                                                case CommentTypeError
+                                            }
+                                            let error: reqError = reqError.CommentTypeError
+                                            self.delegate?.manager(self, didFailWith: error)
+                                        }
+                                    }  else {
+                                        enum reqError: Error {
+                                            case noComment
+                                        }
+                                        let error: reqError = reqError.noComment
+                                        self.delegate?.manager(self, didFailWith: error)
+                                    }
+                                } // for in loop
+                                self.delegate?.manager(self, didFetch: productComments)
+                                
+                            } else {
+                                    enum reqError: Error {
+                                        case noData
+                                    }
+                                    let error: reqError = reqError.noData
+                                    self.delegate?.manager(self, didFailWith: error)
+                            }
+                        } else {
+                                enum reqError: Error {
+                                    case DataError
+                                }
+                                let error: reqError = reqError.DataError
+                                self.delegate?.manager(self, didFailWith: error)
+                            }
+                    }
+        } else {
+            enum reqError: Error {
+                case noToken
+            }
+            let error: reqError = reqError.noToken
+            self.delegate?.manager(self, didFailWith: error)
+        }
+    }
+
+    
+    
+    
     
     func fetchproductsProfile(offset: Int, count: Int) -> Void {
         let userdefault = UserDefaults.standard

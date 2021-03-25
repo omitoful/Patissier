@@ -179,7 +179,7 @@ class RootViewController: UIViewController {
 //        let changeVC: UICollectionViewController = CollectionViewController.init()
         
         //用storyboard 初始化
-        let fullScreenSize = UIScreen.main.bounds.size
+//        let fullScreenSize = UIScreen.main.bounds.size
         
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let secondVC = storyBoard.instantiateViewController(withIdentifier: "CollectionViewController") as! CollectionViewController

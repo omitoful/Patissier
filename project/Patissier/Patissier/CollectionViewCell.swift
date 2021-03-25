@@ -9,7 +9,7 @@ import UIKit
 
 // let cell can Push
 protocol PushDelegate: AnyObject {
-    func pushNewView(_ manager: CollectionViewCell) -> Void
+    func pushNewView(_ cell: CollectionViewCell) -> Void
 }
 
 
@@ -22,7 +22,7 @@ class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var iconHeart: UIImageView!
     @IBOutlet weak var picLabel: UILabel!
     @IBOutlet weak var iconPic: UIImageView!
-    
+    var productId: String = ""
     
     func cellInfo() {
         
@@ -48,11 +48,11 @@ class CollectionViewCell: UICollectionViewCell {
 //        iconPic.tintColor = .gray
     }
     
-    weak var delegate: PushDelegate?
+    weak var delegate: PushDelegate? = nil
     
     @IBAction func tapToDetails(_ sender: Any) {
         
-        print("Tap details")
+//        print("Tap details")
         self.delegate?.pushNewView(self)
         
     }

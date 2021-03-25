@@ -18,35 +18,75 @@ import UIScrollView_InfiniteScroll
 //}
 
 
+//class Animal {
+//
+//}
+//
+//class Lion: Animal, Characteristics {
+//    let foo: Int
+//}
+//
+//class Cat: Lion {
+//}
+//
+//class Dog: Animal, Characteristics {
+//    let bar: String
+//}
+//
+//let lion: Lion = Lion()
+//
+//let dog: Dog = Dog.init()
+//
+//let animals: [Animal] = [lion, dog, Dog.init(), Dog.init(), Lion.init(), Cat.init()]
+//
+//
+//for animal: Animal in animals {
+//    if let lion: Lion = animal as? Lion {
+//        lion.foo
+//    } else if let dog = animal as? Dog {
+//        dog.bar
+//    } else {
+//        print("Unknown animal")
+//    }
+//}
+//
+//protocol Characteristics {}
+
+
 
 
 class CollectionViewController: UICollectionViewController,UICollectionViewDelegateFlowLayout, ProductManagerDelegate, PushDelegate {
     
-    func pushNewView(_ manager: CollectionViewCell) {
-        print("pushNewView")
+    func pushNewView(_ cell: CollectionViewCell) {
+        
+//        print("pushNewView & id:\(cell.productId)")
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let DetailViewController: UITableViewController = storyboard.instantiateViewController(withIdentifier: "CellDetailTableViewController") as! CellDetailTableViewController
+        let viewController: UIViewController = storyboard.instantiateViewController(withIdentifier: "CellDetailTableViewController")
+        let detailViewController: CellDetailTableViewController = viewController as! CellDetailTableViewController
+        detailViewController.productID = cell.productId
+        
         if let navigationController: UINavigationController = self.navigationController {
-            
-                navigationController.pushViewController(DetailViewController, animated: true)
-                print("Contains NavigationController")
-            } else {
-                print("No NavigationController")
-            }
+            navigationController.pushViewController(detailViewController, animated: true)
+            print("Contains NavigationController")
+        } else {
+            print("No NavigationController")
+        }
     }
-    
     
     var products: [Product] = [] // need to take the value out to share to the other funcs
     var offset: Int = 0
     var count: Int = 9
-    var productId: String = ""
+    
+    func manager(_ manager: ProductManager, didFetch products: [ProductComments]) {
+        return ()
+    }
     
     func manager(_ manager: ProductManager, didFetch products: [Product]) -> Void {
         
-
-        print(self.products)
+//        print(self.products)
         self.products.append(contentsOf: products)
-        print(self.products)
+//        print(self.products)
         self.offset += self.count
 //        print("offset:\(self.offset)")
         // [A(3, 4, 5, 6, 7)]
@@ -67,8 +107,7 @@ class CollectionViewController: UICollectionViewController,UICollectionViewDeleg
                 let productManager = ProductManager.init()
                 productManager.delegate = self
                 let _ = productManager.fetchProducts(offset: self.offset, count: self.count)
-                let _ = productManager.fetchproductsComment(productId: self.productId, offset: self.offset, count: self.count)
-                
+
             }, completion: { (finished) -> Void in
                 // finish infinite scroll animations
                     self.collectionView.finishInfiniteScroll()
@@ -106,13 +145,12 @@ class CollectionViewController: UICollectionViewController,UICollectionViewDeleg
         let productmanerger: ProductManager = ProductManager.init()
         let production: ProductManagerDelegate = self
 
-//        productmanerger.delegate = production
-        productmanerger.delegate = self
+        productmanerger.delegate = production
+//        productmanerger.delegate = self
+        
         let _ = productmanerger.fetchProducts(offset: self.offset, count: self.count)
-        let _ = productmanerger.fetchproductsComment(productId: self.productId, offset: self.offset, count: self.count)
-        let _ = productmanerger.fetchproductsProfile(offset: self.offset, count: self.count)
-        print("4")
-//        partFourteenData()
+//        let _ = productmanerger.fetchproductsProfile(offset: self.offset, count: self.count)
+//        print("4")
         
         
 //        self.collectionView.reloadData()
@@ -135,7 +173,7 @@ class CollectionViewController: UICollectionViewController,UICollectionViewDeleg
     }
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        print(self.products.count)
+//        print(self.products.count)
         return self.products.count
     }
 
@@ -148,7 +186,7 @@ class CollectionViewController: UICollectionViewController,UICollectionViewDeleg
             let product: Product = self.products[indexPath.row]
             customCell.productNameLabel.text = product.name
             customCell.productPriceLabel.text = "$ \(product.price)"
-            customCell.cellInfo()
+            customCell.productId = product.id
             
             return customCell
             
@@ -165,15 +203,16 @@ class CollectionViewController: UICollectionViewController,UICollectionViewDeleg
 
 
 
-//Tue.
-//1. complete the UI part-15 (2hr)
-//2. part-16 (3hr)
-//3. part-17 (2hr)
 
 
 // gradient
 // Download UIimage part-11
 // load-more still need to debug
-// complete the UI
+
+// 3/25
+// comments UI
+// compleate laod-more comments
+// navigation back and title
+// finish the segmentBtn View add the profile
 
 //練習回答問題的時間

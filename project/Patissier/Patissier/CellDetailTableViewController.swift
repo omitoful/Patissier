@@ -7,19 +7,71 @@
 
 import UIKit
 
-class CellDetailTableViewController: UITableViewController {
+class CellDetailTableViewController: UITableViewController, ProductManagerDelegate {
+    
+    func manager(_ manager: ProductManager, didFetch products: [Product]) {
+        
+        print(products)
+        let info = products[0]
+        self.productPrice.text = "$ \(info.price)"
+        self.productName.text = info.name
+        
+        return ()
+    }
+    
+    func manager(_ manager: ProductManager, didFetch products: [ProductComments]) {
+        
+//        print(self.productComments) []
+        self.productComments.append(contentsOf: products)
+//        print(self.productComments) [have comments]
+        
+        DispatchQueue.main.async (
+                execute: { () -> Void in
+                    let _ = self.tableView.reloadData()
+                    return ()
+                }
+            )
+    }
+    
+    func manager(_ manager: ProductManager, didFailWith error: Error) {
+        print(error)
+        return ()
+    }
+    
 
+    
+    @IBOutlet weak var productName: UILabel!
+    @IBOutlet weak var productPrice: UILabel!
+    @IBOutlet weak var AddCartBtn: UIButton!
+    @IBOutlet weak var productImage: UIImageView!
+    
+    var offset = 0
+    var count = 9
+    var productID = ""
+    var productComments: [ProductComments] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Add the top of the UIView
+        AddCartBtn.layer.cornerRadius = 5.0
+        title = "Product"
+        self.tableView.estimatedRowHeight = self.tableView.rowHeight
+        self.tableView.rowHeight = UITableView.automaticDimension
+        //add the info in delegate(name,price)
+        // if there is no comments, no lines
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
+        
+        
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        let productManager = ProductManager.init()
+        productManager.delegate = self
+        print(self.productID)
+        let _ = productManager.fetchproductsComment(productId: self.productID, offset: self.offset, count: self.count)
+        let _ = productManager.fetchProductDetail(productId: self.productID)
+        
     }
-
-    // MARK: - Table view data source
+    
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -28,14 +80,19 @@ class CellDetailTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return self.productComments.count
     }
 
+    
 
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TabelCell", for: indexPath)
-        
+        let cell: TableViewCell = tableView.dequeueReusableCell(withIdentifier: "TabelCell", for: indexPath) as! TableViewCell
         // Configure the cell...
+        
+        let productComment: ProductComments = self.productComments[indexPath.row]
+        cell.commentName.text = productComment.userName
+        cell.comment.text = productComment.text
 
         return cell
     }
