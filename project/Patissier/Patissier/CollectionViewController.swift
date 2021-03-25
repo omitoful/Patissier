@@ -204,14 +204,15 @@ class CollectionViewController: UICollectionViewController,UICollectionViewDeleg
 
 
 
-
+// Not finish yet:
 // gradient
-// Download UIimage part-11
+// Download UIimage part-11.15
 // load-more still need to debug
+// product tableView info pop too slow
 
-// 3/25
-// compleate laod-more comments
+// Todo:
 // navigation back and title
 // finish the segmentBtn View add the profile
+// 
 
-//練習回答問題的時間
+// Practice the fluency of answering the Qs

@@ -192,9 +192,10 @@ class RootViewController: UIViewController {
         secondVC.navigationController?.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: UIFont(name: "Hoefler Text", size: 10) as Any]
         secondVC.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
         secondVC.navigationController?.navigationBar.isTranslucent = true
-        secondVC.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         secondVC.navigationController?.navigationBar.shadowImage = UIImage()
-        secondVC.navigationController?.navigationBar.barTintColor = .clear
+        secondVC.navigationController?.navigationBar.backgroundColor = .blue
+//        secondVC.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        secondVC.navigationController?.navigationBar.barTintColor = .clear
         
         navVC.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
         self.present(navVC, animated: true, completion: nil)
