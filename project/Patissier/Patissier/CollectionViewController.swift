@@ -210,7 +210,6 @@ class CollectionViewController: UICollectionViewController,UICollectionViewDeleg
 // load-more still need to debug
 
 // 3/25
-// comments UI
 // compleate laod-more comments
 // navigation back and title
 // finish the segmentBtn View add the profile

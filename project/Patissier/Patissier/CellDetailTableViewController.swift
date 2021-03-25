@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import UIScrollView_InfiniteScroll
 
 class CellDetailTableViewController: UITableViewController, ProductManagerDelegate {
     
@@ -24,6 +25,7 @@ class CellDetailTableViewController: UITableViewController, ProductManagerDelega
 //        print(self.productComments) []
         self.productComments.append(contentsOf: products)
 //        print(self.productComments) [have comments]
+        self.offset += self.count
         
         DispatchQueue.main.async (
                 execute: { () -> Void in
@@ -31,6 +33,21 @@ class CellDetailTableViewController: UITableViewController, ProductManagerDelega
                     return ()
                 }
             )
+        self.tableView.addInfiniteScroll { (tableView) -> Void in
+            tableView.performBatchUpdates({ () -> Void in
+                // update tableView
+                let productManager = ProductManager.init()
+                productManager.delegate = self
+                let _ = productManager.fetchproductsComment(productId: self.productID, offset: self.offset, count: self.count)
+                
+            }, completion: { (finished) -> Void in
+                // finish infinite scroll animations
+                self.tableView.finishInfiniteScroll()
+                self.tableView.setShouldShowInfiniteScrollHandler { _ -> Bool in
+                    return false
+                }
+            })
+        }
     }
     
     func manager(_ manager: ProductManager, didFailWith error: Error) {
