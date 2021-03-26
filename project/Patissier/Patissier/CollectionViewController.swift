@@ -76,7 +76,11 @@ class CollectionViewController: UICollectionViewController,UICollectionViewDeleg
     
     var products: [Product] = [] // need to take the value out to share to the other funcs
     var offset: Int = 0
-    var count: Int = 9
+    var count: Int = 5
+    
+    func manager(_ manager: ProductManager, didFetch profile: [Profile]) {
+        return ()
+    }
     
     func manager(_ manager: ProductManager, didFetch products: [ProductComments]) {
         return ()
@@ -110,9 +114,9 @@ class CollectionViewController: UICollectionViewController,UICollectionViewDeleg
 
             }, completion: { (finished) -> Void in
                 // finish infinite scroll animations
-                    self.collectionView.finishInfiniteScroll()
-                    self.collectionView.setShouldShowInfiniteScrollHandler { _ -> Bool in
-                        return false
+                        self.collectionView.finishInfiniteScroll()
+                        self.collectionView.setShouldShowInfiniteScrollHandler { _ -> Bool in
+                            return false
                 }
             })
         }
@@ -128,7 +132,6 @@ class CollectionViewController: UICollectionViewController,UICollectionViewDeleg
 
     func manager(_ manager: ProductManager, didFailWith error: Error) -> Void {
         print(error)
-
         return ()
     }
 
@@ -205,14 +208,18 @@ class CollectionViewController: UICollectionViewController,UICollectionViewDeleg
 
 
 // Not finish yet:
-// gradient
+// gradient,navUI
 // Download UIimage part-11.15
-// load-more still need to debug
-// product tableView info pop too slow
 
+// Mon.
+// product tableView info pop too slow
+// load-more still need to debug
+// missing the if{} of the load-more
+// ============================================
 // Todo:
-// navigation back and title
 // finish the segmentBtn View add the profile
-// 
+// complete the part of tableView API
+// try coreData
+// finish part-18 (without orders)
 
 // Practice the fluency of answering the Qs

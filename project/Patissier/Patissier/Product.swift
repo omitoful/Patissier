@@ -20,3 +20,7 @@ struct ProductComments {
     let userName: String
 }
 
+struct Profile {
+    let profileID: String
+    let profileName: String
+}

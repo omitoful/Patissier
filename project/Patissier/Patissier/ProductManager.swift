@@ -10,6 +10,7 @@ import Alamofire
 
 // class Lion {}
 protocol ProductManagerDelegate: AnyObject {
+    func manager(_ manager: ProductManager, didFetch profile: [Profile])
     
     func manager(_ manager: ProductManager, didFetch products: [Product])
     
@@ -334,17 +335,45 @@ class ProductManager {
             ]
             AF.request("https://api.tinyworld.cc/patissier/v1/me",headers: headers)
                 .responseJSON { response in
-//                    print("profile: \(response)")
                     
+                    var profile: Profile
+                    if let profileData: [String: Any] = response.value as? [String: Any] {
+                        if let data: [String: Any] = profileData["data"] as? [String: Any] {
+                            if let profileName = data["name"] as? String {
+                                if let profileID = data["id"] as? String {
+                                    
+                                    profile = Profile(profileID: profileID, profileName: profileName)
+                                    self.delegate?.manager(self, didFetch: [profile])
+                                    
+                                } else {
+                                    enum reqError: Error {
+                                        case noID
+                                    }
+                                    let error: reqError = reqError.noID
+                                    self.delegate?.manager(self, didFailWith: error)
+                                }
+                            } else {
+                                enum reqError: Error {
+                                    case noName
+                                }
+                                let error: reqError = reqError.noName
+                                self.delegate?.manager(self, didFailWith: error)
+                            }
+                        } else {
+                            enum reqError: Error {
+                                case noData
+                            }
+                            let error: reqError = reqError.noData
+                            self.delegate?.manager(self, didFailWith: error)
+                        }
+                    } else {
+                        enum reqError: Error {
+                            case dataError
+                        }
+                        let error: reqError = reqError.dataError
+                        self.delegate?.manager(self, didFailWith: error)
+                    }
                 }
-            AF.request("https://api.tinyworld.cc/patissier/v1/me/orders?offset=\(offset)&count=\(count)",headers: headers)
-                .responseJSON { response in
-//                    print("profile: \(response)")
-                    // do not finish
-                }
-            
-            
-
         } else {
             enum reqError: Error {
                 case noToken
@@ -356,7 +385,12 @@ class ProductManager {
     
 }
 
-
+// orders:
+//AF.request("https://api.tinyworld.cc/patissier/v1/me/orders?offset=\(offset)&count=\(count)",headers: headers)
+//    .responseJSON { response in
+////                    print("profile: \(response)")
+//        // do not finish
+//    }
 
 
 

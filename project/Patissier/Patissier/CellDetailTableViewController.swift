@@ -10,6 +10,10 @@ import UIScrollView_InfiniteScroll
 
 class CellDetailTableViewController: UITableViewController, ProductManagerDelegate {
     
+    func manager(_ manager: ProductManager, didFetch profile: [Profile]) {
+        return ()
+    }
+    
     func manager(_ manager: ProductManager, didFetch products: [Product]) {
         
         print(products)
@@ -40,13 +44,22 @@ class CellDetailTableViewController: UITableViewController, ProductManagerDelega
                 productManager.delegate = self
                 let _ = productManager.fetchproductsComment(productId: self.productID, offset: self.offset, count: self.count)
                 
-            }, completion: { (finished) -> Void in
-                // finish infinite scroll animations
-                self.tableView.finishInfiniteScroll()
-                self.tableView.setShouldShowInfiniteScrollHandler { _ -> Bool in
-                    return false
+//                if products.isEmpty {
+                    self.tableView.finishInfiniteScroll()
+                    self.tableView.setShouldShowInfiniteScrollHandler { _ -> Bool in
+                        return false
+//                    }
                 }
-            })
+                
+            }
+//            }, completion: { (finished) -> Void in
+//                // finish infinite scroll animations
+//                self.tableView.finishInfiniteScroll()
+//                self.tableView.setShouldShowInfiniteScrollHandler { _ -> Bool in
+//                    return false
+//                }
+//            }
+            )
         }
     }
     
@@ -63,7 +76,7 @@ class CellDetailTableViewController: UITableViewController, ProductManagerDelega
     @IBOutlet weak var productImage: UIImageView!
     
     var offset = 0
-    var count = 9
+    var count = 3
     var productID = ""
     var productComments: [ProductComments] = []
     
@@ -75,7 +88,7 @@ class CellDetailTableViewController: UITableViewController, ProductManagerDelega
         title = "Product"
         self.tableView.estimatedRowHeight = self.tableView.rowHeight
         self.tableView.rowHeight = UITableView.automaticDimension
-        //add the info in delegate(name,price)
+        // add the info in delegate(name,price)
         // if there is no comments, no lines
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         
