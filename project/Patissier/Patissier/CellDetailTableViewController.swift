@@ -37,29 +37,22 @@ class CellDetailTableViewController: UITableViewController, ProductManagerDelega
                     return ()
                 }
             )
-        self.tableView.addInfiniteScroll { (tableView) -> Void in
-            tableView.performBatchUpdates({ () -> Void in
-                // update tableView
-                let productManager = ProductManager.init()
-                productManager.delegate = self
-                let _ = productManager.fetchproductsComment(productId: self.productID, offset: self.offset, count: self.count)
-                
-//                if products.isEmpty {
-                    self.tableView.finishInfiniteScroll()
-                    self.tableView.setShouldShowInfiniteScrollHandler { _ -> Bool in
-                        return false
-//                    }
-                }
-                
+        
+        
+        if products.isEmpty {
+            self.tableView.setShouldShowInfiniteScrollHandler { _ -> Bool in
+                return false
             }
-//            }, completion: { (finished) -> Void in
-//                // finish infinite scroll animations
-//                self.tableView.finishInfiniteScroll()
-//                self.tableView.setShouldShowInfiniteScrollHandler { _ -> Bool in
-//                    return false
-//                }
-//            }
-            )
+        } else {
+            self.tableView.addInfiniteScroll { (tableView) -> Void in
+                tableView.performBatchUpdates({ () -> Void in
+                    // update tableView
+                    let productManager = ProductManager.init()
+                    productManager.delegate = self
+                    let _ = productManager.fetchproductsComment(productId: self.productID, offset: self.offset, count: self.count)
+                    self.tableView.finishInfiniteScroll()
+                })
+            }
         }
     }
     

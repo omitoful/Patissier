@@ -76,7 +76,7 @@ class CollectionViewController: UICollectionViewController,UICollectionViewDeleg
     
     var products: [Product] = [] // need to take the value out to share to the other funcs
     var offset: Int = 0
-    var count: Int = 5
+    var count: Int = 9
     
     func manager(_ manager: ProductManager, didFetch profile: [Profile]) {
         return ()
@@ -104,22 +104,26 @@ class CollectionViewController: UICollectionViewController,UICollectionViewDeleg
                     return ()
                 }
             )
+        // 先結束UI 才可以繼續load-more
+        self.collectionView.finishInfiniteScroll()
         
-        self.collectionView.addInfiniteScroll { (collectionView) -> Void in
-            collectionView.performBatchUpdates({ () -> Void in
-                // update collection view
-                let productManager = ProductManager.init()
-                productManager.delegate = self
-                let _ = productManager.fetchProducts(offset: self.offset, count: self.count)
-
-            }, completion: { (finished) -> Void in
-                // finish infinite scroll animations
-                        self.collectionView.finishInfiniteScroll()
-                        self.collectionView.setShouldShowInfiniteScrollHandler { _ -> Bool in
-                            return false
-                }
-            })
+        if products.isEmpty {
+            self.collectionView.setShouldShowInfiniteScrollHandler { _ -> Bool in
+                return false
+            }
+        } else {
+            self.collectionView.addInfiniteScroll { (collectionView) -> Void in
+                collectionView.performBatchUpdates({ () -> Void in
+                    // update collection view
+                    let productManager = ProductManager.init()
+                    productManager.delegate = self
+                    let _ = productManager.fetchProducts(offset: self.offset, count: self.count)
+                })
+            }
         }
+        
+        
+        
                 //[A(3, 4, 5, 6, 7)]
                 //[B(3, 4, 5, 6, 7)]
     //            self?.products.append(contentsOf: products)
@@ -203,23 +207,3 @@ class CollectionViewController: UICollectionViewController,UICollectionViewDeleg
         return 1
     }
 }
-
-
-
-
-// Not finish yet:
-// gradient,navUI
-// Download UIimage part-11.15
-
-// Mon.
-// product tableView info pop too slow
-// load-more still need to debug
-// missing the if{} of the load-more
-// ============================================
-// Todo:
-// finish the segmentBtn View add the profile
-// complete the part of tableView API
-// try coreData
-// finish part-18 (without orders)
-
-// Practice the fluency of answering the Qs

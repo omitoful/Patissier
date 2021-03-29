@@ -14,6 +14,7 @@
 		911A6D84260CE70100ED4414 /* SegmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911A6D83260CE70100ED4414 /* SegmentTableViewCell.swift */; };
 		911A6D87260CE71900ED4414 /* SegmentCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911A6D86260CE71900ED4414 /* SegmentCollectionViewController.swift */; };
 		911A6D8A260CE75000ED4414 /* SegmentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911A6D89260CE75000ED4414 /* SegmentCollectionViewCell.swift */; };
+		914AC2E1260F1E3C00813D83 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914AC2E0260F1E3C00813D83 /* TabBarController.swift */; };
 		91757D3825F1E3EF002F6B86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91757D3725F1E3EF002F6B86 /* AppDelegate.swift */; };
 		91757D3A25F1E3EF002F6B86 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91757D3925F1E3EF002F6B86 /* SceneDelegate.swift */; };
 		91757D3F25F1E3EF002F6B86 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91757D3D25F1E3EF002F6B86 /* Main.storyboard */; };
@@ -37,6 +38,7 @@
 		911A6D83260CE70100ED4414 /* SegmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentTableViewCell.swift; sourceTree = "<group>"; };
 		911A6D86260CE71900ED4414 /* SegmentCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentCollectionViewController.swift; sourceTree = "<group>"; };
 		911A6D89260CE75000ED4414 /* SegmentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentCollectionViewCell.swift; sourceTree = "<group>"; };
+		914AC2E0260F1E3C00813D83 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		91757D3425F1E3EF002F6B86 /* Patissier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Patissier.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91757D3725F1E3EF002F6B86 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		91757D3925F1E3EF002F6B86 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -93,6 +95,16 @@
 			path = SegmentView;
 			sourceTree = "<group>";
 		};
+		914AC2EA26116DA300813D83 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				91757D4225F1E3F3002F6B86 /* LaunchScreen.storyboard */,
+				91757D3D25F1E3EF002F6B86 /* Main.storyboard */,
+				91757D4025F1E3F3002F6B86 /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		91757D2B25F1E3EF002F6B86 = {
 			isa = PBXGroup;
 			children = (
@@ -118,16 +130,15 @@
 				91757D3925F1E3EF002F6B86 /* SceneDelegate.swift */,
 				911A6D6A2609C0D500ED4414 /* Product.swift */,
 				911A6D6D2609C12300ED4414 /* ProductManager.swift */,
-				91757D3D25F1E3EF002F6B86 /* Main.storyboard */,
 				917C908525F9CFD500E9E13C /* RootViewController.swift */,
 				91757D7F25F72C15002F6B86 /* CollectionViewCell.swift */,
 				91757D7B25F72831002F6B86 /* CollectionViewController.swift */,
 				917C90B52602000200E9E13C /* CellDetailTableViewController.swift */,
 				911A6D7A260C6E4B00ED4414 /* TableViewCell.swift */,
+				914AC2E0260F1E3C00813D83 /* TabBarController.swift */,
 				911A6D7E260CE67800ED4414 /* SegmentView */,
-				91757D4025F1E3F3002F6B86 /* Assets.xcassets */,
-				91757D4225F1E3F3002F6B86 /* LaunchScreen.storyboard */,
 				91757D4525F1E3F3002F6B86 /* Info.plist */,
+				914AC2EA26116DA300813D83 /* Resource */,
 			);
 			path = Patissier;
 			sourceTree = "<group>";
@@ -249,6 +260,7 @@
 				917C90B62602000200E9E13C /* CellDetailTableViewController.swift in Sources */,
 				911A6D6B2609C0D500ED4414 /* Product.swift in Sources */,
 				91757D8425F73D80002F6B86 /* ViewController.swift in Sources */,
+				914AC2E1260F1E3C00813D83 /* TabBarController.swift in Sources */,
 				91757D8025F72C15002F6B86 /* CollectionViewCell.swift in Sources */,
 				911A6D6E2609C12300ED4414 /* ProductManager.swift in Sources */,
 				911A6D7B260C6E4B00ED4414 /* TableViewCell.swift in Sources */,

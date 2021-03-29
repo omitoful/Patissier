@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IcS-91-gCQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ijU-PY-KGc">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Collection View Controller-->
+        <!--Item-->
         <scene sceneID="lxN-E0-g7z">
             <objects>
                 <collectionViewController storyboardIdentifier="CollectionViewController" wantsFullScreenLayout="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="DcU-G4-w0N" customClass="CollectionViewController" customModule="Patissier" customModuleProvider="target" sceneMemberID="viewController">
@@ -158,11 +158,12 @@
                             <outlet property="delegate" destination="DcU-G4-w0N" id="6Th-kC-FEl"/>
                         </connections>
                     </collectionView>
+                    <tabBarItem key="tabBarItem" title="Item" id="GkZ-6p-LWx"/>
                     <navigationItem key="navigationItem" id="ys9-Hh-364"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5wa-7Y-8zZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="828" y="80"/>
+            <point key="canvasLocation" x="604" y="-50"/>
         </scene>
         <!--Cell Detail Table View Controller-->
         <scene sceneID="cs4-n2-CgC">
@@ -302,9 +303,9 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YBi-b1-zUz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1474" y="80"/>
+            <point key="canvasLocation" x="1439" y="-50"/>
         </scene>
-        <!--Segment View Controller-->
+        <!--Item-->
         <scene sceneID="z4s-Nh-5LZ">
             <objects>
                 <viewController storyboardIdentifier="SegmentViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="IcS-91-gCQ" customClass="SegmentViewController" customModule="Patissier" customModuleProvider="target" sceneMemberID="viewController">
@@ -355,7 +356,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Laz-tm-G46">
-                                <rect key="frame" x="0.0" y="340" width="414" height="556"/>
+                                <rect key="frame" x="0.0" y="340" width="828" height="556"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A7F-gZ-nI3">
                                         <rect key="frame" x="0.0" y="0.0" width="828" height="556"/>
@@ -394,7 +395,7 @@
                                     <constraint firstItem="A7F-gZ-nI3" firstAttribute="top" secondItem="kuu-dA-R34" secondAttribute="top" id="1Q5-ss-4o3"/>
                                     <constraint firstItem="A7F-gZ-nI3" firstAttribute="leading" secondItem="kuu-dA-R34" secondAttribute="leading" id="5bE-NE-Ejm"/>
                                     <constraint firstItem="A7F-gZ-nI3" firstAttribute="leading" secondItem="Laz-tm-G46" secondAttribute="leading" id="GOO-vv-8de"/>
-                                    <constraint firstAttribute="trailing" secondItem="A7F-gZ-nI3" secondAttribute="trailing" constant="-414" id="XmN-FG-CKH"/>
+                                    <constraint firstAttribute="trailing" secondItem="A7F-gZ-nI3" secondAttribute="trailing" id="XmN-FG-CKH"/>
                                     <constraint firstItem="A7F-gZ-nI3" firstAttribute="top" secondItem="kuu-dA-R34" secondAttribute="top" id="ku3-je-yNJ"/>
                                     <constraint firstItem="kuu-dA-R34" firstAttribute="bottom" secondItem="A7F-gZ-nI3" secondAttribute="bottom" id="ueh-E9-713"/>
                                     <constraint firstAttribute="bottom" secondItem="A7F-gZ-nI3" secondAttribute="bottom" id="xRS-7A-twq"/>
@@ -408,10 +409,13 @@
                                     <constraint firstAttribute="height" constant="40" id="CP1-kT-x0w"/>
                                 </constraints>
                                 <segments>
-                                    <segment title="Favorite"/>
                                     <segment title="Purchased"/>
+                                    <segment title="Favorite"/>
                                 </segments>
                                 <color key="selectedSegmentTintColor" white="0.14744755993150685" alpha="0.24684289383561644" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="segmentedControll:" destination="IcS-91-gCQ" eventType="valueChanged" id="ifZ-Z2-8Gb"/>
+                                </connections>
                             </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ixr-oB-hL5"/>
@@ -424,7 +428,7 @@
                             <constraint firstItem="Laz-tm-G46" firstAttribute="top" secondItem="iFN-Dn-SaO" secondAttribute="bottom" constant="5" id="IZE-dg-bcA"/>
                             <constraint firstItem="arA-F9-3Rq" firstAttribute="leading" secondItem="ixr-oB-hL5" secondAttribute="leading" id="Pbu-rp-x3I"/>
                             <constraint firstItem="ixr-oB-hL5" firstAttribute="trailing" secondItem="ghR-Ex-Wig" secondAttribute="trailing" id="UIU-bp-u7Q"/>
-                            <constraint firstItem="Laz-tm-G46" firstAttribute="trailing" secondItem="ghR-Ex-Wig" secondAttribute="trailing" id="UPM-ma-kA0"/>
+                            <constraint firstItem="Laz-tm-G46" firstAttribute="trailing" secondItem="ghR-Ex-Wig" secondAttribute="trailing" constant="414" id="UPM-ma-kA0"/>
                             <constraint firstItem="ixr-oB-hL5" firstAttribute="trailing" secondItem="iFN-Dn-SaO" secondAttribute="trailing" constant="20" id="ZAI-X3-zTr"/>
                             <constraint firstItem="arA-F9-3Rq" firstAttribute="top" secondItem="nlj-uw-9j4" secondAttribute="top" id="Zfm-wl-ov8"/>
                             <constraint firstAttribute="bottom" secondItem="Laz-tm-G46" secondAttribute="bottom" id="e4y-fG-iJF"/>
@@ -437,13 +441,15 @@
                             <constraint firstItem="ghR-Ex-Wig" firstAttribute="top" secondItem="nlj-uw-9j4" secondAttribute="bottom" id="t9o-3g-ZPg"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="3Rz-tV-sjT"/>
                     <connections>
+                        <outlet property="scrollView" destination="Laz-tm-G46" id="qaF-f9-UCy"/>
                         <outlet property="userName" destination="3GT-W8-QeN" id="fY2-vB-gWU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xlm-Or-vZr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2373.913043478261" y="79.6875"/>
+            <point key="canvasLocation" x="604" y="899"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -612,7 +618,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Snb-Y6-8v2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="172" y="80"/>
+            <point key="canvasLocation" x="-1107" y="410"/>
         </scene>
         <!--Segment Collection View Controller-->
         <scene sceneID="iCI-hh-57d">
@@ -753,7 +759,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AsM-fj-day" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3387" y="329"/>
+            <point key="canvasLocation" x="1439" y="1182"/>
         </scene>
         <!--Segment Table View Controller-->
         <scene sceneID="4ww-DH-RoB">
@@ -811,7 +817,25 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s9m-e4-Xmb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3386.9565217391305" y="-138.61607142857142"/>
+            <point key="canvasLocation" x="1439" y="714"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="MP6-Wp-x3U">
+            <objects>
+                <tabBarController storyboardIdentifier="TabBarController" id="Fht-BO-KwE" customClass="TabBarController" customModule="Patissier" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cxH-fF-kbm">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="DcU-G4-w0N" kind="relationship" relationship="viewControllers" id="W59-dv-up9"/>
+                        <segue destination="IcS-91-gCQ" kind="relationship" relationship="viewControllers" id="Crh-iy-pzM"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w1t-am-5rF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-175" y="410"/>
         </scene>
     </scenes>
     <resources>

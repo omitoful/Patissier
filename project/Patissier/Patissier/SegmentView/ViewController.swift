@@ -30,6 +30,19 @@ class SegmentViewController: UIViewController, ProductManagerDelegate {
     @IBOutlet weak var userName: UILabel!
     var offset: Int = 0
     var count: Int = 5
+    @IBOutlet weak var scrollView: UIScrollView!
+    
+    @IBAction func segmentedControll(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+        case 1:
+            scrollView.setContentOffset(CGPoint(x: 414, y: 0), animated: true)
+        default :
+            print("Error")
+        }
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
